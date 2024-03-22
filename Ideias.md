@@ -4,6 +4,7 @@ for -> eOSeuNegocio / fazDeNovo
 while -> fazDeNovo / eOSeuNegocio
 int -> taOk
 float -> gaviao
+return ->
 string -> caixaPreta
 Entrada de dados -> receba
 Saida de dados -> olhaSo / ehhhhhh
@@ -20,3 +21,14 @@ break -> cheeega
 - [] horas bolas
 - [x] ehhhhhh
 - [] resenha
+
+Divisao grupo
+Alvaro
+Reservada
+Number
+Main - ler arquivo
+
+Renan
+MathOperator
+
+Mel

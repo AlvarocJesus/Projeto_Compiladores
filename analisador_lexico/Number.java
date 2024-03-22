@@ -2,8 +2,9 @@ package projeto.analisador_lexico;
 
 import java.text.CharacterIterator;
 
-public class Number {
-    @Override
+public class Number extends AFD {
+
+	@Override
 	public Token evaluate(CharacterIterator code) {
 		String number;
 

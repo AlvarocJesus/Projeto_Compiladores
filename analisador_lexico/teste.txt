@@ -1,5 +1,8 @@
-gaviao x = 1.1
-taOk y = 5
-gaviao z = 2.2
-taOk= 10
-taOk result = x * y + z
+gaviao x = 1.1;
+taOk y = 5;
+gaviao z = 2.2;
+taOk= 10;
+taOk result = x * y + z;
+depende(result > 2) {
+  olhaSo(result);
+}

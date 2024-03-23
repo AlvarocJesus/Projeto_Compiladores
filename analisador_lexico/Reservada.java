@@ -2,10 +2,12 @@ package projeto.analisador_lexico;
 
 import java.text.CharacterIterator;
 
-public class Reservada {
-    String[] reservadas = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba", "olhaSo", "cheeega" };
+public class Reservada extends AFD {
+    String[] reservadas = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba",
+            "olhaSo", "cheeega" };
 
-    public Token evalute(CharacterIterator code){
+    @Override
+    public Token evalute(CharacterIterator code) {
         String reservada = "";
 
         for (int i = 0; i < reservadas.length; i++) {
@@ -35,6 +37,6 @@ public class Reservada {
     }
 
     private boolean endReservada(CharacterIterator code) {
-		return code.current() == ' ' || code.current() == CharacterIterator.DONE;
-	}
+        return code.current() == ' ' || code.current() == CharacterIterator.DONE;
+    }
 }

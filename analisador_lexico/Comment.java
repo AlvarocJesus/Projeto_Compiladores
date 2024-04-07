@@ -13,6 +13,7 @@ public class Comment extends AFD {
             code.next();
             if (code.current() == '/') {
                 comment += "/";
+                code.next();
                 comment += readComment(code);
 
                 if (endComment(code)) {

@@ -1,42 +1,37 @@
-package projeto.analisador_lexico;
-
 import java.text.CharacterIterator;
 
 public class Reservada extends AFD {
-    String[] reservadas = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba",
-            "olhaSo", "cheeega" };
+	String reservadas[] = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba",
+			"olhaSo", "cheeega" };
 
-    @Override
-    public Token evalute(CharacterIterator code) {
-        String reservada = "";
+	@Override
+	public Token evaluate(CharacterIterator code) {
+		String reservada = "";
 
-        for (int i = 0; i < reservadas.length; i++) {
-            for (char c : reservadas[i].toCharArray()) {
-                if (code.current() == c) {
-                    reservada += code.current();
-                    code.next();
-                }
-            }
+		for (int i = 0; i < reservadas.length; i++) {
+			for (char c : reservadas[i].toCharArray()) {
 
-            if (endReservada(code)) {
-                return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada);
-            }
-        }
+				if (code.current() == c) {
+					reservada += code.current();
 
-        return null;
-    }
+					code.next();
+				}
+			}
 
-    private String readReservada(CharacterIterator code) {
-        String reservada = "";
+			if (endReservada(code)) {
+				if (reservada.equals(reservadas[i])) {
+					return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada);
+				}
+			}
+		}
 
-        while (Character.isLetter(code.current())) {
-            reservada += code.current();
-        }
+		return null;
+	}
 
-        return reservada;
-    }
-
-    private boolean endReservada(CharacterIterator code) {
-        return code.current() == ' ' || code.current() == CharacterIterator.DONE;
-    }
+	private boolean endReservada(CharacterIterator code) {
+		return code.current() == ' '
+				|| code.current() == '('
+				|| code.current() == ')'
+				|| code.current() == CharacterIterator.DONE;
+	}
 }

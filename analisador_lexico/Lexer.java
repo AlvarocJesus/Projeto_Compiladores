@@ -19,6 +19,7 @@ public class Lexer {
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new ID());
+
     }
 
     // Metodo para pular espaco em branco
@@ -40,7 +41,7 @@ public class Lexer {
 
             for (AFD afd : afds) {
                 int pos = code.getIndex();
-                Token t = afd.evaluate(code);
+                Token t = afd.evaluate(code, lineError, (code.getIndex() + 1));
 
                 if (t != null) {
                     accepted = true;

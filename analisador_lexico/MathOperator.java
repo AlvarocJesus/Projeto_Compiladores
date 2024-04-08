@@ -4,44 +4,44 @@ import java.text.CharacterIterator;
 
 public class MathOperator extends AFD {
     @Override
-    public Token evaluate(CharacterIterator code) {
+    public Token evaluate(CharacterIterator code, int linha, int column) {
         switch (code.current()) {
             case '+':
                 code.next();
-                return new Token("SOMA", "+");
+                return new Token("SOMA", "+", linha, column);
             case '-':
                 code.next();
-                return new Token("SUB", "-");
+                return new Token("SUB", "-", linha, column);
             case '*':
                 code.next();
-                return new Token("MUL", "*");
+                return new Token("MUL", "*", linha, column);
             case '/':
                 code.next();
-                return new Token("DIV", "/");
+                return new Token("DIV", "/", linha, column);
             case '(':
                 code.next();
-                return new Token("LPAREN", "(");
+                return new Token("LPAREN", "(", linha, column);
             case ')':
                 code.next();
-                return new Token("RPAREN", ")");
+                return new Token("RPAREN", ")", linha, column);
             case '{':
                 code.next();
-                return new Token("LCHAVE", "{");
+                return new Token("LCHAVE", "{", linha, column);
             case '[':
                 code.next();
-                return new Token("LCOLCHETE", "[");
+                return new Token("LCOLCHETE", "[", linha, column);
             case ']':
                 code.next();
-                return new Token("rCOLCHETE", "]");
+                return new Token("rCOLCHETE", "]", linha, column);
             case '}':
                 code.next();
-                return new Token("RCHAVE", "}");
+                return new Token("RCHAVE", "}", linha, column);
             case '=':
                 code.next();
-                return new Token("ATRIBUICAO", "=");
+                return new Token("ATRIBUICAO", "=", linha, column);
             case ';':
                 code.next();
-                return new Token("FIM", ";");
+                return new Token("FIM", ";", linha, column);
             default:
                 return null;
         }

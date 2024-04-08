@@ -7,7 +7,7 @@ public class Reservada extends AFD {
             "olhaSo", "cheeega" };
 
     @Override
-    public Token evalute(CharacterIterator code, int linha, int column) {
+    public Token evaluate(CharacterIterator code, int linha, int column) {
         String reservada = "";
 
         for (int i = 0; i < reservadas.length; i++) {

@@ -9,8 +9,9 @@ public class Lexer {
     private List<Token> tokens;
     private List<AFD> afds;
     private CharacterIterator code;
+    private int lineError;
 
-    public Lexer(String code) {
+    public Lexer(String code, int lineError) {
         tokens = new ArrayList<>();
         this.code = new StringCharacterIterator(code);
         afds = new ArrayList<>();
@@ -19,12 +20,13 @@ public class Lexer {
         afds.add(new MathOperator());
         afds.add(new Number());
         afds.add(new ID());
-
+        afds.add(new StringText());
+        this.lineError = lineError;
     }
 
     // Metodo para pular espaco em branco
     public void skipWhiteSpace() {
-        while (code.current() == ' ' || code.current() == '\n') {
+        while (code.current() == ' ' || code.current() == '\n' || code.current() == '\t') {
             code.next();
         }
     }
@@ -58,7 +60,7 @@ public class Lexer {
             throw new RuntimeException("Error: Token not recognized: " + code.current());
         }
 
-        tokens.add(new Token("EOF", "$"));
+        tokens.add(new Token("EOF", "$", lineError, (code.getIndex() + 1)));
         return tokens;
     }
 }

@@ -19,21 +19,13 @@ public class Reservada extends AFD {
             }
 
             if (endReservada(code)) {
-                return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada, linha, column);
+                if (reservada.equals(reservadas[i])) {
+                    return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada, linha, column);
+                }
             }
         }
 
         return null;
-    }
-
-    private String readReservada(CharacterIterator code) {
-        String reservada = "";
-
-        while (Character.isLetter(code.current())) {
-            reservada += code.current();
-        }
-
-        return reservada;
     }
 
     private boolean endReservada(CharacterIterator code) {

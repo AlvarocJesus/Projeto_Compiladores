@@ -3,32 +3,33 @@ package projeto.analisador_lexico;
 import java.text.CharacterIterator;
 
 public class Reservada extends AFD {
-    String[] reservadas = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba",
-            "olhaSo", "cheeega" };
+	String reservadas[] = { "depende", "planoB", "eOSeuNegocio", "fazDeNovo", "taOk", "gaviao", "caixaPreta", "receba",
+			"olhaSo", "cheeega" };
 
-    @Override
-    public Token evaluate(CharacterIterator code, int linha, int column) {
-        String reservada = "";
+	@Override
+	public Token evaluate(CharacterIterator code, int linha, int column) {
+		String reservada = "";
 
-        for (int i = 0; i < reservadas.length; i++) {
-            for (char c : reservadas[i].toCharArray()) {
-                if (code.current() == c) {
-                    reservada += code.current();
-                    code.next();
-                }
-            }
+		for (int i = 0; i < reservadas.length; i++) {
+			for (char c : reservadas[i].toCharArray()) {
+				if (code.current() == c) {
+					reservada += code.current();
 
-            if (endReservada(code)) {
-                if (reservada.equals(reservadas[i])) {
-                    return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada, linha, column);
-                }
-            }
-        }
+					code.next();
+				}
+			}
 
-        return null;
-    }
+			if (endReservada(code)) {
+				if (reservada.equals(reservadas[i])) {
+					return new Token("RESERVADA_" + reservadas[i].toUpperCase(), reservada, linha, column);
+				}
+			}
+		}
 
-    private boolean endReservada(CharacterIterator code) {
-        return code.current() == ' ' || code.current() == CharacterIterator.DONE;
-    }
+		return null;
+	}
+
+	private boolean endReservada(CharacterIterator code) {
+		return code.current() == ' ' || code.current() == CharacterIterator.DONE;
+	}
 }

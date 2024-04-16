@@ -42,9 +42,60 @@ num -> [0-9]_\*
 
 ```
 S -> tipo id = (string | num | expressao)
-condicao -> (id | num) operador (id | num)
 expressao -> (id | num) operador (id | num)
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
 
 id -> [a-zA-z]_\*
 num -> [0-9]_\*
 ```
+
+### Funcao
+
+```
+S -> id ( parametro ) { expressao }
+parametro -> tipo id | [tipo id , ]*
+expressao -> expressao -> (id | num) operador (id | num)
+
+id -> [a-zA-z]_\*
+num -> [0-9]_\*
+```
+
+### Classe
+
+```
+S -> id { expressao }
+expressao -> expressao -> (id | num) operador (id | num)
+
+id -> [a-zA-z]_\*
+num -> [0-9]_\*
+```
+
+### Comentario
+
+```
+S -> comentario
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

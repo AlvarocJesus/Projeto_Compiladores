@@ -74,6 +74,9 @@ num -> [0-9]_\*
 
 ```
 S -> comentario
+comentario -> # texto
+
+texto -> [a-zA-Z0-9]*
 ```
 
 

@@ -8,6 +8,7 @@
 S -> depende (condicao) { expressao }
 condicao -> (id | num) operador (id | num)
 expressao -> (id | num) operador (id | num)
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
 
 id -> [a-zA-z]_\*
 num -> [0-9]_\*
@@ -19,6 +20,7 @@ num -> [0-9]_\*
 S -> depende (condicao) { expressao }
 condicao -> (id | num) operador (id | num)
 expressao -> (id | num) operador (id | num)
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
 
 id -> [a-zA-z]_\*
 num -> [0-9]_\*
@@ -27,9 +29,10 @@ num -> [0-9]_\*
 ### While
 
 ```
-S -> depende (condicao) { expressao }
+S -> while ( condicao ) { expressao }
 condicao -> (id | num) operador (id | num)
 expressao -> (id | num) operador (id | num)
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
 
 id -> [a-zA-z]_\*
 num -> [0-9]_\*
@@ -38,10 +41,64 @@ num -> [0-9]_\*
 ### Atribuição Variável
 
 ```
-S -> depende (condicao) { expressao }
-condicao -> (id | num) operador (id | num)
+S -> tipo id = (string | num | expressao)
 expressao -> (id | num) operador (id | num)
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
 
 id -> [a-zA-z]_\*
 num -> [0-9]_\*
 ```
+
+### Funcao
+
+```
+S -> id ( parametro ) { expressao }
+parametro -> tipo id | [tipo id , ]*
+expressao -> expressao -> (id | num) operador (id | num)
+
+id -> [a-zA-z]_\*
+num -> [0-9]_\*
+```
+
+### Classe
+
+```
+S -> id { expressao }
+expressao -> expressao -> (id | num) operador (id | num)
+
+id -> [a-zA-z]_\*
+num -> [0-9]_\*
+```
+
+### Comentario
+
+```
+S -> comentario
+comentario -> # texto
+
+texto -> [a-zA-Z0-9]*
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

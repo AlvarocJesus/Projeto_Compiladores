@@ -41,6 +41,9 @@ public class Main {
                 System.out.println(token);
             }
         }
+
+        Parser parser = new Parser(token);
+        parser.main();
     }
 
     public ArrayList<String> Arquivo() {

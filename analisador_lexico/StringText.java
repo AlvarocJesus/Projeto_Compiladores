@@ -10,7 +10,7 @@ public class StringText extends AFD {
     if (code.current() == '"') {
       stringText += '"';
       code.next();
-      stringText = readString(code);
+      stringText += readString(code);
 
       if (endString(code)) {
         return new Token("STRING", stringText, line, column);

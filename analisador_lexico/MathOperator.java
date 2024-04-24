@@ -36,12 +36,44 @@ public class MathOperator extends AFD {
             case '}':
                 code.next();
                 return new Token("RCHAVE", "}", linha, column);
-            case '=':
-                code.next();
-                return new Token("ATRIBUICAO", "=", linha, column);
+            // case '=':
+            // code.next();
+            // return new Token("ATRIBUICAO", "=", linha, column);
             case ';':
                 code.next();
                 return new Token("FIM", ";", linha, column);
+            case '>':
+                code.next();
+                return new Token("MAIORQ", ">");
+            case '<':
+                code.next();
+                return new Token("MENORQ", "<");
+            case '&':
+                code.next();
+                if (code.current() == '&') {
+                    code.current();
+                    return new Token("AND", "&&");
+                }
+            case '|':
+                code.next();
+                if (code.current() == '|') {
+                    code.next();
+                    return new Token("AND", "||");
+                }
+            case '=':
+                code.next();
+                if (code.current() == '=') {
+                    code.next();
+                    return new Token("IGUAL", "==");
+                } else {
+                    return new Token("ATRIBUICAO", "=", linha, column);
+                }
+            case '!':
+                code.next();
+                if (code.current() == '=') {
+                    code.next();
+                    return new Token("DIFERENTE", "!=");
+                }
             default:
                 return null;
         }

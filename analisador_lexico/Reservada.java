@@ -30,6 +30,9 @@ public class Reservada extends AFD {
 	}
 
 	private boolean endReservada(CharacterIterator code) {
-		return code.current() == ' ' || code.current() == CharacterIterator.DONE;
+		return code.current() == ' '
+				|| code.current() == '('
+				|| code.current() == ')'
+				|| code.current() == CharacterIterator.DONE;
 	}
 }

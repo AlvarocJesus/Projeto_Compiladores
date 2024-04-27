@@ -1,5 +1,3 @@
-package projeto.analisador_lexico;
-
 public class Token {
     private String lexema;
     private String tipo;

@@ -1,5 +1,3 @@
-package projeto.analisador_lexico;
-
 import java.text.CharacterIterator;
 
 public class Comment extends AFD {

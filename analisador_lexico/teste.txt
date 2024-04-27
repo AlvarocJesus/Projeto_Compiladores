@@ -17,3 +17,7 @@ depende(result > 2) {
 depende(result = 2 && result <=2){
 	olhaSo("Entrou no nosso comando if");
 }
+
+fazDeNovo(y == 5) {
+	y = 5;
+}

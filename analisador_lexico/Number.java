@@ -18,7 +18,6 @@ public class Number extends AFD {
 			if (code.current() == '.') {
 				number += '.';
 				code.next();
-				System.out.println("PONTO");
 				number += readNumber(code);
 
 				if (endNumber(code)) {

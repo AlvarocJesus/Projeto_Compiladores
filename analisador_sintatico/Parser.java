@@ -1,9 +1,6 @@
-package projeto.analisador_sintatico;
-
 import java.util.List;
-import projeto.analisador_lexico.Token;
 
-public class Parser {
+public static class Parser {
   List<Token> tokens;
   Token token;
 

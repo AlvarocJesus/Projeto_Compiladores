@@ -13,6 +13,8 @@ public class StringText extends AFD {
       stringText += readString(code);
 
       if (endString(code)) {
+        stringText += '"';
+        code.next();
         return new Token("STRING", stringText, line, column);
       }
     }
@@ -32,6 +34,7 @@ public class StringText extends AFD {
   }
 
   private boolean endString(CharacterIterator code) {
-    return code.current() == '"' || code.current() == ')' || code.current() == CharacterIterator.DONE;
+    return code.current() == '\r' || code.current() == '\n' || code.current() == '"'
+        || code.current() == CharacterIterator.DONE;
   }
 }

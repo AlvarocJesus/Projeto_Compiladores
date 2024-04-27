@@ -36,35 +36,32 @@ public class MathOperator extends AFD {
             case '}':
                 code.next();
                 return new Token("RCHAVE", "}", linha, column);
-            // case '=':
-            // code.next();
-            // return new Token("ATRIBUICAO", "=", linha, column);
             case ';':
                 code.next();
                 return new Token("FIM", ";", linha, column);
             case '>':
                 code.next();
-                return new Token("MAIORQ", ">");
+                return new Token("MAIORQ", ">", linha, column);
             case '<':
                 code.next();
-                return new Token("MENORQ", "<");
+                return new Token("MENORQ", "<", linha, column);
             case '&':
                 code.next();
                 if (code.current() == '&') {
                     code.current();
-                    return new Token("AND", "&&");
+                    return new Token("AND", "&&", linha, column);
                 }
             case '|':
                 code.next();
                 if (code.current() == '|') {
                     code.next();
-                    return new Token("AND", "||");
+                    return new Token("AND", "||", linha, column);
                 }
             case '=':
                 code.next();
                 if (code.current() == '=') {
                     code.next();
-                    return new Token("IGUAL", "==");
+                    return new Token("IGUAL", "==", linha, column);
                 } else {
                     return new Token("ATRIBUICAO", "=", linha, column);
                 }
@@ -72,7 +69,7 @@ public class MathOperator extends AFD {
                 code.next();
                 if (code.current() == '=') {
                     code.next();
-                    return new Token("DIFERENTE", "!=");
+                    return new Token("DIFERENTE", "!=", linha, column);
                 }
             default:
                 return null;

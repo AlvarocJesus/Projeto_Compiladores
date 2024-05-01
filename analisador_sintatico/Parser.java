@@ -37,23 +37,29 @@ public class Parser {
   }
 
   private boolean firstToken() {
-    if (matchL("fazDeNovo")) {
+    if (matchLFirst("fazDeNovo")) {
       System.out.println("Entrou na verificacao fazDeNovo");
-      return true;
-    } else if (matchL("depende")) {
-      System.out.println("Entrou na verificacao depende");
-      return true;
-    } else if (matchL("eOSeuNegocio")) {
-      System.out.println("Entrou na verificacao eOSeuNegocio");
-      return true;
-    } else if (matchL("taOk")) {
-      System.out.println("Entrou na verificacao TAOK");
-      if (atribuicaoTaOk()) {
+      if (fazDeNovo()) {
         return true;
       }
-    } else if (matchL("gaviao")) {
-      System.out.println("Entrou na verificacao gaviao");
-      if (atribuicaoGaviao()) {
+    } else if (matchLFirst("depende")) {
+      System.out.println("Entrou na verificacao depende");
+      if (depende()) {
+        return true;
+      }
+    } else if (matchLFirst("eOSeuNegocio")) {
+      System.out.println("Entrou na verificacao eOSeuNegocio");
+      if (eOSeuNegocio()) {
+        return true;
+      }
+    } else if (tipoVariavelFirst()) {
+      System.out.println("Entrou na verificacao tipoVariavelFirst");
+      if (atribuicaoVariavel()) {
+        return true;
+      }
+    } else if (matchTFirst("COMENTARIO")) {
+      System.out.println("Entrou na verificacao comentario");
+      if (comentario()) {
         return true;
       }
     }
@@ -62,9 +68,10 @@ public class Parser {
     return false;
   }
 
-  private boolean dependes() {
-    if (matchL("depende") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao()
-        && matchL("}") && matchL("else") && matchL("{") && expressao() && matchL("}")) {
+  // Alterar esse cara
+  private boolean depende() {
+    if (matchL("depende") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
+        && matchL("planpB") && matchL("{") && expressao() && matchL("}")) {
       return true;
     }
 
@@ -72,9 +79,15 @@ public class Parser {
     return false;
   }
 
+  private boolean matchLFirst(String lexema) {
+    if (token.getLexema().equals(lexema)) {
+      return true;
+    }
+
+    return false;
+  }
+
   private boolean matchL(String lexema) {
-    System.out.println("Token: " + token);
-    System.out.println("Token Lexema: " + token.getLexema());
     if (token.getLexema().equals(lexema)) {
       token = nextToken();
       return true;
@@ -83,9 +96,15 @@ public class Parser {
     return false;
   }
 
+  private boolean matchTFirst(String tipo) {
+    if (token.getTipo().equals(tipo)) {
+      return true;
+    }
+
+    return false;
+  }
+
   private boolean matchT(String tipo) {
-    // System.out.println("Token: " + token);
-    // System.out.println("Token: " + token.getTipo());
     if (token.getTipo().equals(tipo)) {
       token = nextToken();
       return true;
@@ -94,8 +113,10 @@ public class Parser {
     return false;
   }
 
+  // Talvez mudar algo aqui
   private boolean condicao() {
-    if (matchT("ID") && operador() && matchT("NUM")) {
+    if (matchT("ID") && operador() && (matchT("NUM") || matchT("ID"))) {
+      token = nextToken();
       return true;
     }
 
@@ -103,8 +124,8 @@ public class Parser {
     return false;
   }
 
-  private boolean tipoVariavel() {
-    if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
+  private boolean tipoVariavelFirst() {
+    if (matchLFirst("taOk") || matchLFirst("gaviao") || matchLFirst("caixaPreta")) {
       return true;
     }
 
@@ -112,14 +133,33 @@ public class Parser {
     return false;
   }
 
-  private boolean atribuicaoVariavel() {
-    System.out.println("Token atual: " + token);
-    if ((matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) && operador()
-        && (matchT("ID") || matchT("NUM") || matchT("STRING"))) {
+  private boolean tipoVariavel() {
+    if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
+      token = nextToken();
       return true;
     }
 
-    erro("atribuicaoTaOk");
+    erro("tipoVariavel");
+    return false;
+  }
+
+  private boolean tipoValorVariavel() {
+    if (matchT("ID") || matchT("NUM") || matchT("STRING")) {
+      token = nextToken();
+      return true;
+    }
+
+    erro("tipoValorVariavel");
+    return false;
+  }
+
+  private boolean atribuicaoVariavel() {
+    System.out.println("Token atual: " + token);
+    if (tipoVariavel() && operador() && tipoValorVariavel() && matchL(";")) {
+      return true;
+    }
+
+    erro("atribuicaoVariavel");
     return false;
   }
 
@@ -144,8 +184,19 @@ public class Parser {
     return false;
   }
 
+  private boolean printar() {
+    if (matchL("olhaSo") && matchL("(") && tipoValorVariavel() && matchL(")") && matchL(";")) {
+      token = nextToken();
+      return true;
+    }
+
+    erro("printar");
+    return false;
+  }
+
   private boolean expressao() {
-    if (matchT("ID") && matchL("=") && matchT("NUM") && matchL(";")) {
+    if (printar() || matchT("ID") && matchL("=") && matchT("NUM") && matchL(";")) {
+      token = nextToken();
       return true;
     }
 
@@ -154,7 +205,8 @@ public class Parser {
   }
 
   private boolean operador() {
-    if (matchL(">") || matchL("<") || matchL("==")) {
+    if (matchL(">") || matchL("<") || matchL("==") || matchL("!=")) {
+      token = nextToken();
       return true;
     }
 
@@ -171,10 +223,20 @@ public class Parser {
     return false;
   }
 
+  private boolean contador() {
+    if (matchL("ID") && operadorMath() && operadorMath()) {
+      token = nextToken();
+      return true;
+    }
+
+    erro("contador");
+    return false;
+  }
+
   // While
-  private boolean fazDeNovos() {
-    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao()
-        && matchL("}")) {
+  private boolean fazDeNovo() {
+    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
+        && matchL(";")) {
 
       return true;
     }
@@ -183,10 +245,10 @@ public class Parser {
   }
 
   // for
-  private boolean eOSeuNegocios() {
+  private boolean eOSeuNegocio() {
 
-    if (matchL("eOSeuNegocio") && matchL("(") && matchT("ID") && matchL(";") && condicao() && matchL(";")
-        && matchT("ID") && operadorMath() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
+    if (matchL("eOSeuNegocio") && matchL("(") && tipoVariavel() && matchL(";") && condicao() && matchL(";")
+        && contador() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
       return true;
     }
 
@@ -194,4 +256,12 @@ public class Parser {
     return false;
   }
 
+  private boolean comentario() {
+    if (matchT("COMENTARIO")) {
+      return true;
+    }
+
+    erro("comentario");
+    return false;
+  }
 }

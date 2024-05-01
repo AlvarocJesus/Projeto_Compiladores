@@ -2,103 +2,69 @@
 
 ## Gramaticas livres de contexto
 
-### IF
+### IF -> Quse Ok
 
-```
-S -> depende (condicao) { expressao }
+S -> depende (condicao) { expressao } else
+else -> planoB { expressao } | ε
 condicao -> (id | num) operador (id | num)
 expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "\*" | "/"
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
-### For
+### For -> Ok
 
-```
-S -> depende (condicao) { expressao }
-condicao -> (id | num) operador (id | num)
+S -> eOSeuNegocio (inicializacao; condicao; incremento) { expressao }
+inicializacao -> tipo id = num
+condicao -> id operador ( num | id )
+incremento -> id operador operador
 expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
+operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "\*" | "/"
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
-### While
+### While -> Ok
 
-```
-S -> while ( condicao ) { expressao }
-condicao -> (id | num) operador (id | num)
+S -> fazDeNovo ( condicao ) | (modo) { expressao } fim
+condicao -> id operador num
 expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
+modo -> null | true **acho que tem que tirar**
+fim -> cheeega **ta usando no lugar errado**
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
-### Atribuição Variável
+### Atribuição Variável -> Ok
 
-```
-S -> tipo id = (string | num | expressao)
-expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "*" | "/"
+S -> tipo id = atribuicao
+tipo -> int | string | float
+atribuicao -> num | id | string
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
 ### Funcao
 
-```
 S -> id ( parametro ) { expressao }
-parametro -> tipo id | [tipo id , ]*
-expressao -> expressao -> (id | num) operador (id | num)
+parametro -> tipo id | [tipo id , ]\* | ε
+expressao -> (id | num) operador (id | num)
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
 ### Classe
 
-```
 S -> id { expressao }
 expressao -> expressao -> (id | num) operador (id | num)
 
-id -> [a-zA-z]_\*
-num -> [0-9]_\*
-```
+id -> [a-zA-z]⁺
+num -> [0-9]⁺
 
-### Comentario
+### Comentário -> Ok
 
-```
 S -> comentario
 comentario -> # texto
 
-texto -> [a-zA-Z0-9]*
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+texto -> [a-zA-Z0-9]⁺

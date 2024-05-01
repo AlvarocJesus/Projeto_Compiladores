@@ -79,6 +79,38 @@ public class Parser {
     return false;
   }
 
+  private boolean atribuicaoVariavel() {
+    if (tipoVariavel() && matchT("ID") && operador() && tipoValorVariavel() && matchL(";")) {
+      return true;
+    }
+
+    erro("atribuicaoVariavel");
+    return false;
+  }
+
+  // While
+  private boolean fazDeNovo() {
+    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
+        && matchL(";")) {
+
+      return true;
+    }
+    erro("fazDeNovo");
+    return false;
+  }
+
+  // for
+  private boolean eOSeuNegocio() {
+
+    if (matchL("eOSeuNegocio") && matchL("(") && tipoVariavel() && matchL(";") && condicao() && matchL(";")
+        && contador() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
+      return true;
+    }
+
+    erro("eOSeuNegocio");
+    return false;
+  }
+
   private boolean matchLFirst(String lexema) {
     if (token.getLexema().equals(lexema)) {
       return true;
@@ -135,7 +167,7 @@ public class Parser {
 
   private boolean tipoVariavel() {
     if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
-      token = nextToken();
+      // token = nextToken();
       return true;
     }
 
@@ -144,43 +176,12 @@ public class Parser {
   }
 
   private boolean tipoValorVariavel() {
-    if (matchT("ID") || matchT("NUM") || matchT("STRING")) {
-      token = nextToken();
+    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")) {
+      // token = nextToken();
       return true;
     }
 
     erro("tipoValorVariavel");
-    return false;
-  }
-
-  private boolean atribuicaoVariavel() {
-    System.out.println("Token atual: " + token);
-    if (tipoVariavel() && operador() && tipoValorVariavel() && matchL(";")) {
-      return true;
-    }
-
-    erro("atribuicaoVariavel");
-    return false;
-  }
-
-  private boolean atribuicaoTaOk() {
-    System.out.println("Token atual: " + token);
-    if (matchL("taOk") && operador() && (matchT("ID") || matchT("NUM") || matchT("STRING"))) {
-      return true;
-    }
-
-    erro("atribuicaoTaOk");
-    return false;
-  }
-
-  private boolean atribuicaoGaviao() {
-    if (matchT("ID") && matchL("=") && (matchT("ID") || matchT("NUM") || matchT("STRING") || matchT("FLUTUANTE"))
-        && matchL(";")) {
-      token = nextToken();
-      return true;
-    }
-
-    erro("atribuicaoGaviao");
     return false;
   }
 
@@ -205,8 +206,8 @@ public class Parser {
   }
 
   private boolean operador() {
-    if (matchL(">") || matchL("<") || matchL("==") || matchL("!=")) {
-      token = nextToken();
+    if (matchL(">") || matchL("<") || matchL("==") || matchL("!=") || matchL("=")) {
+      // token = nextToken();
       return true;
     }
 
@@ -230,29 +231,6 @@ public class Parser {
     }
 
     erro("contador");
-    return false;
-  }
-
-  // While
-  private boolean fazDeNovo() {
-    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
-        && matchL(";")) {
-
-      return true;
-    }
-    erro("fazDeNovo");
-    return false;
-  }
-
-  // for
-  private boolean eOSeuNegocio() {
-
-    if (matchL("eOSeuNegocio") && matchL("(") && tipoVariavel() && matchL(";") && condicao() && matchL(";")
-        && contador() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
-      return true;
-    }
-
-    erro("eOSeuNegocio");
     return false;
   }
 

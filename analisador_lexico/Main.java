@@ -1,7 +1,4 @@
 import java.util.List;
-import java.util.ArrayList;
-import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -20,13 +17,13 @@ public class Main {
             System.out.println(token);
         }
 
-        Parser parser = new Parser(tokens);
-        parser.main();
+        // Parser parser = new Parser(tokens);
+        // parser.main();
     }
 
     public String Arquivo() throws IOException {
         String data = new String(
-                Files.readAllBytes(Paths.get("teste.txt")),
+                Files.readAllBytes(Paths.get("teste.me")),
                 StandardCharsets.UTF_8);
         return data;
     }

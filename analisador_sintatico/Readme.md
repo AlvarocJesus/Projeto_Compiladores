@@ -2,69 +2,147 @@
 
 ## Gramaticas livres de contexto
 
-### IF -> Quse Ok
+### First -> Ok
 
-S -> depende (condicao) { expressao } else
-else -> planoB { expressao } | ε
-condicao -> (id | num) operador (id | num)
-expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "\*" | "/"
+```txt
+first -> depende first | fazDeNovo first | eOSeuNegocio first | olhaSo first | variavel first | comentario first | olhaSo first | ε
+```
 
-id -> [a-zA-z]⁺
+### Depende - IF
+
+```txt
+depende -> depende ( condicao ) { expressao } planoB
+planoB -> planoB { expressao } | ε
+condicao -> variavel operador variavel
+variavel -> id | num | flutuante | string | ( mathExpressao )
+operador -> ">" | "<" | "==" | "!=" | "&&" | "||" | "+" | "-" | "\" | "*" | "/" | "="
+expressao -> variavel operador mathExpressao ";"
+
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+math´ -> *Fmath´ | /Fmath´ | ε
+
+id -> [a-zA-Z]⁺
 num -> [0-9]⁺
+flutuante -> num⁺.num⁺
+string -> "(id+num+flutuante)"
+```
 
-### For -> Ok
+### EOSeuNegocio - For
 
-S -> eOSeuNegocio (inicializacao; condicao; incremento) { expressao }
-inicializacao -> tipo id = num
-condicao -> id operador ( num | id )
-incremento -> id operador operador
-expressao -> (id | num) operador (id | num)
-operador -> "!=" | "==" | ">" | "<" | "==" | "+" | "-" | "\*" | "/"
+```txt
+for -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
+varContador -> tipoVariavel variavel operador num
+condicao -> variavel operador variavel
+incremento -> variavel operador num | flutuante
+expressao -> mathExpressao ";"
 
-id -> [a-zA-z]⁺
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+math´ -> *Fmath´ | /Fmath´ | ε
+
+
+tipoVariavel -> id | num | flutuante | string | ( mathExpressao )
+variavel -> id | num | flutuante | string
+operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
+
+id -> [a-zA-Z]⁺
+num -> [0-9]⁺ | ε
+flutuante -> num⁺.num⁺ | ε
+string -> "(id+num+flutuante)"
+```
+
+### FazDeNovo - While
+
+```txt
+while -> fazDeNovo ( condicao ) { expressao }
+condicao -> variavel operador variavel
+expressao -> mathExpressao ";"
+
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+math´ -> *Fmath´ | /Fmath´ | ε
+
+varivel -> id | num | flutuante | string | ( mathExpressao )
+operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
+
+id -> [a-zA-Z]⁺
 num -> [0-9]⁺
+flutuante -> num.num
+string -> " (id + num + flutuante) "
+```
 
-### While -> Ok
+### Atribuição Variável
 
-S -> fazDeNovo ( condicao ) | (modo) { expressao } fim
-condicao -> id operador num
-expressao -> (id | num) operador (id | num)
-modo -> null | true **acho que tem que tirar**
-fim -> cheeega **ta usando no lugar errado**
+```txt
+atribVariavel -> tipoVariavel variavel "=" variavel ";"
+tipoVariavel -> taOk | gaviao | caixaPreta
+variavel -> id | num | flutuante | string
 
-id -> [a-zA-z]⁺
+id -> [a-zA-Z]⁺
 num -> [0-9]⁺
+flutuante -> num.num
+string -> " (id + num + flutuante) "
+```
 
-### Atribuição Variável -> Ok
+### Comentário
 
-S -> tipo id = atribuicao
-tipo -> int | string | float
-atribuicao -> num | id | string
-
-id -> [a-zA-z]⁺
-num -> [0-9]⁺
-
-### Funcao
-
-S -> id ( parametro ) { expressao }
-parametro -> tipo id | [tipo id , ]\* | ε
-expressao -> (id | num) operador (id | num)
-
-id -> [a-zA-z]⁺
-num -> [0-9]⁺
-
-### Classe
-
-S -> id { expressao }
-expressao -> expressao -> (id | num) operador (id | num)
-
-id -> [a-zA-z]⁺
-num -> [0-9]⁺
-
-### Comentário -> Ok
-
-S -> comentario
+```txt
 comentario -> # texto
 
 texto -> [a-zA-Z0-9]⁺
+```
+
+### OlhaSo -> Print
+
+```txt
+print -> olhaSo ( texto ) ;
+texto -> id | num | flutuante | string
+
+id -> [a-zA-Z]⁺
+num -> [0-9]⁺
+flutuante -> num.num
+string -> " (id + num + flutuante) "
+```
+
+### Função
+
+```txt
+funcao -> id "(" parametros ")" "{" expressao "}"
+parametros -> tipoVariavel variavel parametros | "," parametros | ε
+expressao -> mathExpressao ";"
+
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+
+tipoVariavel -> id | num | flutuante | string | ( mathExpressao )
+variavel -> id | num | flutuante | string
+
+id -> [a-zA-Z]⁺
+num -> [0-9]⁺
+flutuante -> num.num
+string -> " (id + num + flutuante) "
+```
+
+### Classe
+
+```txt
+classe -> id { expressao }
+expressao -> mathExpressao ";"
+
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+math´ -> *Fmath´ | /Fmath´ | ε
+
+tipoVariavel -> id | num | flutuante | string | ( mathExpressao )
+
+id -> [a-zA-Z]⁺
+num -> [0-9]⁺
+flutuante -> num.num
+string -> " (id + num + flutuante) "
+```

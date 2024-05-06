@@ -4,9 +4,6 @@ public class MathOperator extends AFD {
     @Override
     public Token evaluate(CharacterIterator code, int linha, int column) {
         switch (code.current()) {
-            case '+':
-                code.next();
-                return new Token("SOMA", "+", linha, column);
             case '-':
                 code.next();
                 return new Token("SUB", "-", linha, column);
@@ -68,6 +65,14 @@ public class MathOperator extends AFD {
                 if (code.current() == '=') {
                     code.next();
                     return new Token("DIFERENTE", "!=", linha, column);
+                }
+            case '+':
+                code.next();
+                if (code.current() == '+') {
+                    code.next();
+                    return new Token("INCREMENTO_SOMA", "++", linha, column);
+                } else {
+                    return new Token("SOMA", "+", linha, column);
                 }
             default:
                 return null;

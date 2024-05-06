@@ -26,8 +26,6 @@ public class Parser {
     token = nextToken();
 
     if (firstToken()) {
-      System.out.println("Deu certo a arvore");
-      System.out.println("Token no comeco atual: " + token);
       if (matchT("EOF")) {
         System.out.println("Sintaticamente correto");
       } else {
@@ -38,30 +36,37 @@ public class Parser {
 
   private boolean firstToken() {
     if (matchLFirst("fazDeNovo")) {
-      System.out.println("Entrou na verificacao fazDeNovo");
       if (fazDeNovo()) {
+        firstToken();
         return true;
       }
     } else if (matchLFirst("depende")) {
-      System.out.println("Entrou na verificacao depende");
       if (depende()) {
+        firstToken();
         return true;
       }
     } else if (matchLFirst("eOSeuNegocio")) {
-      System.out.println("Entrou na verificacao eOSeuNegocio");
       if (eOSeuNegocio()) {
+        firstToken();
         return true;
       }
     } else if (tipoVariavelFirst()) {
-      System.out.println("Entrou na verificacao tipoVariavelFirst");
       if (atribuicaoVariavel()) {
+        firstToken();
         return true;
       }
     } else if (matchTFirst("COMENTARIO")) {
-      System.out.println("Entrou na verificacao comentario");
       if (comentario()) {
+        firstToken();
         return true;
       }
+    } else if (matchLFirst("olhaSo")) {
+      if (olhaSo()) {
+        firstToken();
+        return true;
+      }
+    } else {
+      return true;
     }
 
     erro("firstToken");
@@ -71,7 +76,7 @@ public class Parser {
   // Alterar esse cara
   private boolean depende() {
     if (matchL("depende") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
-        && matchL("planpB") && matchL("{") && expressao() && matchL("}")) {
+        && matchL("planoB") && matchL("{") && expressao() && matchL("}")) {
       return true;
     }
 
@@ -90,6 +95,8 @@ public class Parser {
 
   // While
   private boolean fazDeNovo() {
+    System.out.println("\nFaz de novo");
+    System.out.println("Token: " + token);
     if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
         && matchL(";")) {
 
@@ -111,7 +118,19 @@ public class Parser {
     return false;
   }
 
+  private boolean olhaSo() {
+    if (printar()) {
+      return true;
+    }
+
+    erro("olhaSo");
+    return false;
+  }
+
   private boolean matchLFirst(String lexema) {
+    System.out.println("\nMatchLFirst");
+    System.out.println("Token: " + token);
+    System.out.println("Lexema: " + lexema);
     if (token.getLexema().equals(lexema)) {
       return true;
     }
@@ -147,12 +166,11 @@ public class Parser {
 
   // Talvez mudar algo aqui
   private boolean condicao() {
-    if (matchT("ID") && operador() && (matchT("NUM") || matchT("ID"))) {
-      token = nextToken();
+    if (tipoValorVariavel() && operador() && (matchT("NUM") || matchT("ID"))) {
       return true;
     }
 
-    erro("condicao");
+    erro("Condicao" + token);
     return false;
   }
 
@@ -161,27 +179,22 @@ public class Parser {
       return true;
     }
 
-    erro("tipoVariavel");
     return false;
   }
 
   private boolean tipoVariavel() {
     if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
-      // token = nextToken();
       return true;
     }
 
-    erro("tipoVariavel");
     return false;
   }
 
   private boolean tipoValorVariavel() {
     if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")) {
-      // token = nextToken();
       return true;
     }
 
-    erro("tipoValorVariavel");
     return false;
   }
 
@@ -196,22 +209,19 @@ public class Parser {
   }
 
   private boolean expressao() {
-    if (printar() || matchT("ID") && matchL("=") && matchT("NUM") && matchL(";")) {
-      token = nextToken();
+    if (matchT("ID") && matchL("=") && matchT("NUM") && matchL(";")) {
       return true;
     }
 
-    erro("expressao");
     return false;
   }
 
   private boolean operador() {
-    if (matchL(">") || matchL("<") || matchL("==") || matchL("!=") || matchL("=")) {
-      // token = nextToken();
+    if (matchL(">") || matchL("<") || matchL("==") || matchL("!=") || matchL("=") || matchL("||") || matchL("&&")) {
       return true;
     }
 
-    erro("operador");
+    erro("Operador: " + token);
     return false;
   }
 

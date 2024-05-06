@@ -29,7 +29,7 @@ public class Parser {
       if (matchT("EOF")) {
         System.out.println("Sintaticamente correto");
       } else {
-        erro("Fudeu de veeeeez!!!!");
+        erro("Deu errado!!!!");
       }
     }
   }

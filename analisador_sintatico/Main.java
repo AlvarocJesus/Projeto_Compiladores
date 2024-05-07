@@ -26,24 +26,28 @@ public class Main {
     tokens.add(new Token("NUM", "10", 4, 7));
     tokens.add(new Token("FIM", ";", 4, 8));
     tokens.add(new Token("COMENTARIO", "#essa é uma soma", 6, 1));
-    // tokens.add(new Token("RESERVADA_TAOK", "taOk", 7, 1));
-    // tokens.add(new Token("ID", "result", 7, 5));
-    // tokens.add(new Token("ATRIBUICAO", "=", 7, 11));
-    // tokens.add(new Token("NUM", "1", 7, 11));
-    // tokens.add(new Token("FIM", ";", 7, 11));
-    // tokens.add(new Token("COMENTARIO", "# esse é for", 9, 1));
-    // tokens.add(new Token("RESERVADA_DEPENDE", "depende", 10, 1));
-    // tokens.add(new Token("LPAREN", "(", 10, 7));
-    // tokens.add(new Token("ID", "result", 10, 7));
-    // tokens.add(new Token("MAIORQ", ">", 10, 13));
-    // tokens.add(new Token("NUM", "2", 10, 14));
-    // tokens.add(new Token("RPAREN", ")", 10, 14));
-    // tokens.add(new Token("LCHAVE", "{", 10, 15));
-    // tokens.add(new Token("ID", "a", 11, 3));
-    // tokens.add(new Token("ATRIBUICAO", "=", 11, 4));
-    // tokens.add(new Token("NUM", "1", 11, 5));
-    // tokens.add(new Token("FIM", ";", 11, 5));
-    // tokens.add(new Token("RCHAVE", "}", 12, 1));
+    tokens.add(new Token("RESERVADA_TAOK", "taOk", 7, 1));
+    tokens.add(new Token("ID", "result", 7, 5));
+    tokens.add(new Token("ATRIBUICAO", "=", 7, 11));
+    tokens.add(new Token("NUM", "1", 7, 11));
+    tokens.add(new Token("FIM", ";", 7, 11));
+
+    tokens.add(new Token("COMENTARIO", "# esse é for", 9, 1));
+
+    tokens.add(new Token("RESERVADA_DEPENDE", "depende", 10, 1));
+    tokens.add(new Token("LPAREN", "(", 10, 7));
+    tokens.add(new Token("ID", "result", 10, 7));
+    tokens.add(new Token("MAIORQ", ">", 10, 13));
+    tokens.add(new Token("NUM", "2", 10, 14));
+    tokens.add(new Token("RPAREN", ")", 10, 14));
+
+    tokens.add(new Token("LCHAVE", "{", 10, 15));
+
+    tokens.add(new Token("ID", "a", 11, 3));
+    tokens.add(new Token("ATRIBUICAO", "=", 11, 4));
+    tokens.add(new Token("NUM", "1", 11, 5));
+    tokens.add(new Token("FIM", ";", 11, 5));
+    tokens.add(new Token("RCHAVE", "}", 12, 1));
     // tokens.add(new Token("RESERVADA_PLANOB", "planoB", 12, 2));
     // tokens.add(new Token("LCHAVE", "{", 12, 8));
     // tokens.add(new Token("ID", "b", 13, 2));

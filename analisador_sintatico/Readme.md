@@ -16,12 +16,12 @@ planoB -> planoB { expressao } | ε
 condicao -> variavel operador variavel
 variavel -> id | num | flutuante | string | ( mathExpressao )
 operador -> ">" | "<" | "==" | "!=" | "&&" | "||" | "+" | "-" | "\" | "*" | "/" | "="
-expressao -> variavel operador mathExpressao ";"
+expressao -> variavel "=" variavel ";" | mathExpressao ";"
 
-mathExpressao -> TmathExpressao’
-mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
-math -> Fmath´
-math´ -> *Fmath´ | /Fmath´ | ε
+mathExpressao -> math mathExpressao’
+mathExpressao’ -> +math mathExpressao’ | -math mathExpressao’ | ε
+math -> variavel math´
+math´ -> *variavel math´ | /variavel math´ | ε
 
 id -> [a-zA-Z]⁺
 num -> [0-9]⁺
@@ -78,9 +78,15 @@ string -> " (id + num + flutuante) "
 ### Atribuição Variável
 
 ```txt
-atribVariavel -> tipoVariavel variavel "=" variavel ";"
+atribVariavel -> tipoVariavel variavel "=" ( variavel || expressao ) ";"
 tipoVariavel -> taOk | gaviao | caixaPreta
-variavel -> id | num | flutuante | string
+variavel -> id | num | flutuante | string | ( mathExpressao )
+expressao -> variavel operador mathExpressao ";"
+
+mathExpressao -> TmathExpressao’
+mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
+math -> Fmath´
+math´ -> *Fmath´ | /Fmath´ | ε
 
 id -> [a-zA-Z]⁺
 num -> [0-9]⁺
@@ -88,7 +94,7 @@ flutuante -> num.num
 string -> " (id + num + flutuante) "
 ```
 
-### Comentário
+### Comentário -> Ok
 
 ```txt
 comentario -> # texto

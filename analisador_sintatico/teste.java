@@ -155,6 +155,11 @@ public class teste {
         firstToken();
         return true;
       }
+    } else if (matchLFirst("depende")) {
+      if (depende()) {
+        firstToken();
+        return true;
+      }
     } else {
       return true;
     }
@@ -163,6 +168,7 @@ public class teste {
     return false;
   }
 
+  // --------------------Atribuição Variavel--------------------
   private boolean atribVariavel() {
     if (tipoVariavel() && variavel() && matchL("=") && variavel() && matchL(";")) {
       return true;
@@ -172,15 +178,7 @@ public class teste {
     return false;
   }
 
-  private boolean tipoVariavel() {
-    if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
-      return true;
-    }
-
-    erro("TipoVariavel: " + token);
-    return false;
-  }
-
+  // --------------------Comentário--------------------
   private boolean comentario() {
     System.out.println("\nComentario");
     if (matchT("COMENTARIO")) {
@@ -191,8 +189,42 @@ public class teste {
     return false;
   }
 
+  // --------------------Depende--------------------
+  private boolean depende() {
+    if (matchL("depende") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
+        && planoB()) {
+      return true;
+    }
+
+    erro("Depende invalido: " + token);
+    return false;
+  }
+
+  private boolean planoB() {
+    if (matchL("planoB")) {
+      if (matchL("{") && expressao() && matchL("}")) {
+        return true;
+      }
+      erro("PlanoB invalido: " + token);
+      return false;
+    }
+
+    return true; // ε
+  }
+
+  // ----------------------------Funcoes intermediarias-------------------------
+  private boolean tipoVariavel() {
+    if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
+      return true;
+    }
+
+    erro("TipoVariavel: " + token);
+    return false;
+  }
+
   private boolean variavel() {
-    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")) {
+    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")
+        || (matchL("(") && mathExpressao() && matchL(")"))) {
       return true;
     }
 
@@ -209,6 +241,77 @@ public class teste {
     return false;
   }
 
+  private boolean condicao() {
+    if (variavel() && operador() && variavel()) {
+      return true;
+    }
+
+    erro("Condicao invalida: " + token);
+    return false;
+  }
+
+  private boolean operador() {
+    if (matchL("<") || matchL(">") || matchL("<=") || matchL(">=") || matchL("==") || matchL("!=") || matchL("||")
+        || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")) {
+      return true;
+    }
+
+    erro("Operador invalido: " + token);
+    return false;
+  }
+
+  private boolean expressao() {
+    if ((variavel() && matchL("=") && variavel() && matchL(";")) || (mathExpressao() && matchL(";"))) {
+      return true;
+    }
+
+    erro("Expressao invalida: " + token);
+    return false;
+  }
+
+  private boolean mathExpressao() {
+    if (math() && mathExpressaoLinha()) {
+      return true;
+    }
+
+    erro("Math Expressao invalida: " + token);
+    return false;
+  }
+
+  private boolean mathExpressaoLinha() {
+    if (matchL("+") || matchL("-")) {
+      if (math() && mathExpressaoLinha()) {
+        return true;
+      }
+      erro("Math Expressao 1 invalida: " + token);
+      return false;
+    }
+
+    return true; // ε
+  }
+
+  private boolean math() {
+    if (variavel() && mathLinha()) {
+      return true;
+    }
+
+    erro("Math invalida: " + token);
+    return false;
+  }
+
+  private boolean mathLinha() {
+    if (matchL("*") || matchL("/")) {
+      if (variavel() && mathLinha()) {
+        return true;
+      }
+      erro("Math 1 invalida: " + token);
+      return false;
+    }
+
+    return true; // ε
+  }
+
+  // ----------------------------Verificacao Dados----------------------------
   private boolean matchLFirst(String lexema) {
     System.out.println("\nMatchLFirst");
     if (token.getLexema().equals(lexema)) {
@@ -227,6 +330,9 @@ public class teste {
   }
 
   private boolean matchL(String lexema) {
+    System.out.println("\nMatchL");
+    System.out.println("Lexema: " + lexema);
+    System.out.println("Token: " + token);
     if (token.getLexema().equals(lexema)) {
       token = nextToken();
       return true;

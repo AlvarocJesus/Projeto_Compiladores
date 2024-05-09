@@ -37,7 +37,7 @@ varContador -> tipoVariavel variavel operador num
 condicao -> variavel operador variavel
 incremento -> id operador incremento'
 incremento' -> num | ε
-expressao -> mathExpressao ";"
+expressao -> variavel "=" variavel ";" | mathExpressao ";"
 
 mathExpressao -> TmathExpressao’
 mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
@@ -45,8 +45,8 @@ math -> Fmath´
 math´ -> *Fmath´ | /Fmath´ | ε
 
 
-tipoVariavel -> id | num | flutuante | string | ( mathExpressao )
-variavel -> id | num | flutuante | string
+tipoVariavel -> taOk | gaviao | caixaPreta
+variavel -> id | num | flutuante | string | ( mathExpressao )
 operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
 
 id -> [a-zA-Z]⁺

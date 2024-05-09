@@ -35,7 +35,8 @@ string -> "(id+num+flutuante)"
 eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
 varContador -> tipoVariavel variavel operador num
 condicao -> variavel operador variavel
-incremento -> variavel operador num | id operador
+incremento -> id operador incremento'
+incremento' -> num | ε
 expressao -> mathExpressao ";"
 
 mathExpressao -> TmathExpressao’

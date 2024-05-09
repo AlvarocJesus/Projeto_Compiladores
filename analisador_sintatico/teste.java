@@ -268,8 +268,11 @@ public class teste {
   }
 
   private boolean operador() {
+    System.out.println("\nOperador");
+    System.out.println("Token: " + token);
     if (matchL("<") || matchL(">") || matchL("<=") || matchL(">=") || matchL("==") || matchL("!=") || matchL("||")
         || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")) {
+      System.out.println("\nOperador: " + token.getLexema());
       return true;
     }
 
@@ -329,7 +332,7 @@ public class teste {
   }
 
   private boolean varContador() {
-    if (tipoVariavel() && variavel() && operador() && matchT("NUM")) {
+    if (tipoVariavel() && variavel() && matchL("=") && matchT("NUM")) {
       return true;
     }
 
@@ -338,7 +341,19 @@ public class teste {
   }
 
   private boolean incremento() {
-    if ((variavel() && operador() && matchT("NUM")) || (matchT("ID") && operador())) {
+    if (matchT("ID") && operador()) {
+      if (matchT("NUM")) {
+        return true;
+      }
+      erro("Incremento invalido: " + token);
+      return false;
+    }
+
+    return true; // ε
+  }
+
+  private boolean incrementoLinha() {
+    if ((matchT("ID") && operador() && matchT("NUM")) || (matchT("ID") && operador())) {
       return true;
     }
 
@@ -369,7 +384,9 @@ public class teste {
     System.out.println("Lexema: " + lexema);
     System.out.println("Token: " + token);
     if (token.getLexema().equals(lexema)) {
+      System.out.println("Lexema igual: " + lexema + " - " + token.getLexema());
       token = nextToken();
+      System.out.println("Novo token: " + token);
       return true;
     }
 

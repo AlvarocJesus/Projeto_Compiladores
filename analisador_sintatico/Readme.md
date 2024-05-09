@@ -8,7 +8,7 @@
 first -> depende first | fazDeNovo first | eOSeuNegocio first | olhaSo first | variavel first | comentario first | olhaSo first | ε
 ```
 
-### Depende - IF
+### Depende - IF -> Ok
 
 ```txt
 depende -> depende ( condicao ) { expressao } planoB
@@ -32,10 +32,10 @@ string -> "(id+num+flutuante)"
 ### EOSeuNegocio - For
 
 ```txt
-for -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
+eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
 varContador -> tipoVariavel variavel operador num
 condicao -> variavel operador variavel
-incremento -> variavel operador num | flutuante
+incremento -> variavel operador num | id operador
 expressao -> mathExpressao ";"
 
 mathExpressao -> TmathExpressao’
@@ -75,7 +75,7 @@ flutuante -> num.num
 string -> " (id + num + flutuante) "
 ```
 
-### Atribuição Variável
+### Atribuição Variável -> Ok
 
 ```txt
 atribVariavel -> tipoVariavel variavel "=" ( variavel || expressao ) ";"

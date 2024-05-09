@@ -160,6 +160,11 @@ public class teste {
         firstToken();
         return true;
       }
+    } else if (matchLFirst("eOSeuNegocio")) {
+      if (eOSeuNegocio()) {
+        firstToken();
+        return true;
+      }
     } else {
       return true;
     }
@@ -212,6 +217,18 @@ public class teste {
     return true; // ε
   }
 
+  // --------------------EOSeuNegocio--------------------
+  private boolean eOSeuNegocio() {
+    if (matchL("eOSeuNegocio") && matchL("(") && varContador()
+        && matchL(";") && condicao() && matchL(";") && incremento() && matchL(")") && matchL("{") && expressao()
+        && matchL("}")) {
+      return true;
+    }
+
+    erro("EOSeuNegocio invalido: " + token);
+    return false;
+  }
+
   // ----------------------------Funcoes intermediarias-------------------------
   private boolean tipoVariavel() {
     if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
@@ -223,7 +240,7 @@ public class teste {
   }
 
   private boolean variavel() {
-    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")
+    if ((matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING"))
         || (matchL("(") && mathExpressao() && matchL(")"))) {
       return true;
     }
@@ -309,6 +326,24 @@ public class teste {
     }
 
     return true; // ε
+  }
+
+  private boolean varContador() {
+    if (tipoVariavel() && variavel() && operador() && matchT("NUM")) {
+      return true;
+    }
+
+    erro("VarContador invalido: " + token);
+    return false;
+  }
+
+  private boolean incremento() {
+    if ((variavel() && operador() && matchT("NUM")) || (matchT("ID") && operador())) {
+      return true;
+    }
+
+    erro("Incremento invalido: " + token);
+    return false;
   }
 
   // ----------------------------Verificacao Dados----------------------------

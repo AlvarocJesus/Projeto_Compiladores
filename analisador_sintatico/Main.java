@@ -87,28 +87,30 @@ public class Main {
     // tokens.add(new Token("FIM", ";", 22, 4));
     // tokens.add(new Token("RCHAVE", "}", 23, 1));
 
-    tokens.add(new Token("COMENTARIO", "# Teste 1 do nosso for", 25, 1));
-
-    tokens.add(new Token("RESERVADA_EOSEUNEGOCIO", "eOSeuNegocio", 26, 1));
-    tokens.add(new Token("LPAREN", "(", 26, 12));
-    tokens.add(new Token("RESERVADA_TAOK", "taOk", 26, 12));
-    tokens.add(new Token("ID", "i", 26, 16));
-    tokens.add(new Token("ATRIBUICAO", "=", 26, 17));
-    tokens.add(new Token("NUM", "0", 26, 18));
-    tokens.add(new Token("FIM", ";", 26, 18));
-    tokens.add(new Token("ID", "i", 26, 19));
-    tokens.add(new Token("MENORQ", "<", 26, 20));
-    tokens.add(new Token("NUM", "5", 26, 21));
-    tokens.add(new Token("FIM", ";", 26, 21));
-    tokens.add(new Token("ID", "i", 26, 22));
-    tokens.add(new Token("INCREMENTO_SOMA", "++", 26, 22));
-    tokens.add(new Token("RPAREN", ")", 26, 23));
-    tokens.add(new Token("LCHAVE", "{", 26, 24));
-    tokens.add(new Token("ID", "x", 27, 2));
-    tokens.add(new Token("ATRIBUICAO", "=", 27, 3));
-    tokens.add(new Token("NUM", "24", 27, 4));
-    tokens.add(new Token("FIM", ";", 27, 5));
-    tokens.add(new Token("RCHAVE", "}", 28, 1));
+    /*
+     * tokens.add(new Token("COMENTARIO", "# Teste 1 do nosso for", 25, 1));
+     * 
+     * tokens.add(new Token("RESERVADA_EOSEUNEGOCIO", "eOSeuNegocio", 26, 1));
+     * tokens.add(new Token("LPAREN", "(", 26, 12));
+     * tokens.add(new Token("RESERVADA_TAOK", "taOk", 26, 12));
+     * tokens.add(new Token("ID", "i", 26, 16));
+     * tokens.add(new Token("ATRIBUICAO", "=", 26, 17));
+     * tokens.add(new Token("NUM", "0", 26, 18));
+     * tokens.add(new Token("FIM", ";", 26, 18));
+     * tokens.add(new Token("ID", "i", 26, 19));
+     * tokens.add(new Token("MENORQ", "<", 26, 20));
+     * tokens.add(new Token("NUM", "5", 26, 21));
+     * tokens.add(new Token("FIM", ";", 26, 21));
+     * tokens.add(new Token("ID", "i", 26, 22));
+     * tokens.add(new Token("INCREMENTO_SOMA", "++", 26, 22));
+     * tokens.add(new Token("RPAREN", ")", 26, 23));
+     * tokens.add(new Token("LCHAVE", "{", 26, 24));
+     * tokens.add(new Token("ID", "x", 27, 2));
+     * tokens.add(new Token("ATRIBUICAO", "=", 27, 3));
+     * tokens.add(new Token("NUM", "24", 27, 4));
+     * tokens.add(new Token("FIM", ";", 27, 5));
+     * tokens.add(new Token("RCHAVE", "}", 28, 1));
+     */
 
     // tokens.add(new Token("COMENTARIO", "# Teste 2 do nosso for", 30, 1));
 
@@ -134,6 +136,27 @@ public class Main {
     // tokens.add(new Token("ID", "i", 32, 6));
     // tokens.add(new Token("FIM", ";", 32, 6));
     // tokens.add(new Token("RCHAVE", "}", 33, 1));
+
+    /*
+     * tokens.add(new Token("RESERVADA_FAZDENOVO", "fazDeNovo", 12, 1));
+     * tokens.add(new Token("LPAREN", "(", 12, 9));
+     * tokens.add(new Token("ID", "x", 12, 9));
+     * tokens.add(new Token("DIFERENTE", "!=", 12, 10));
+     * tokens.add(new Token("ID", "y", 12, 12));
+     * tokens.add(new Token("RPAREN", ")", 12, 12));
+     * tokens.add(new Token("LCHAVE", "{", 12, 12));
+     * tokens.add(new Token("ID", "x", 14, 2));
+     * tokens.add(new Token("INCREMENTO_SOMA", "++", 14, 2));
+     * tokens.add(new Token("FIM", ";", 14, 3));
+     * tokens.add(new Token("RCHAVE", "}", 15, 1));
+     */
+
+    tokens.add(new Token("RESERVADA_OLHASO", "olhaSo", 13, 2));
+    tokens.add(new Token("LPAREN", "(", 13, 7));
+    tokens.add(new Token("STRING", "Dentro do nosso while", 13, 7));
+    tokens.add(new Token("RPAREN", ")", 13, 31));
+    tokens.add(new Token("FIM", ";", 13, 31));
+
     tokens.add(new Token("EOF", "$", 33, 2));
 
     System.out.println("\nAnalisador Sintático\n");

@@ -160,8 +160,20 @@ public class teste {
         firstToken();
         return true;
       }
-    } else if (matchLFirst("eOSeuNegocio")) {
-      if (eOSeuNegocio()) {
+    } /*
+       * else if (matchLFirst("eOSeuNegocio")) {
+       * if (eOSeuNegocio()) {
+       * firstToken();
+       * return true;
+       * }
+       * }
+       */ else if (matchLFirst("fazDeNovo")) {
+      if (fazDeNovo()) {
+        firstToken();
+        return true;
+      }
+    } else if (matchLFirst("olhaSo")) {
+      if (olhaSo()) {
         firstToken();
         return true;
       }
@@ -229,7 +241,27 @@ public class teste {
     return false;
   }
 
-  // ----------------------------Funcoes intermediarias-------------------------
+  // --------------------FazDeNovo--------------------
+  private boolean fazDeNovo() {
+    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
+      return true;
+    }
+
+    erro("FazDeNovo invalido: " + token);
+    return false;
+  }
+
+  // --------------------OlhaSo--------------------
+  private boolean olhaSo() {
+    if (matchL("olhaSo") && matchL("(") && variavel() && matchL(")") && matchL(";")) {
+      return true;
+    }
+
+    erro("OlhaSo invalido: " + token);
+    return false;
+  }
+
+  // --------------------Funcoes intermediarias--------------------
   private boolean tipoVariavel() {
     if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
       return true;
@@ -299,7 +331,7 @@ public class teste {
   }
 
   private boolean mathExpressaoLinha() {
-    if (matchL("+") || matchL("-")) {
+    if (matchL("+") || matchL("-") || matchL("++")) {
       if (math() && mathExpressaoLinha()) {
         return true;
       }
@@ -352,16 +384,7 @@ public class teste {
     return true; // ε
   }
 
-  private boolean incrementoLinha() {
-    if ((matchT("ID") && operador() && matchT("NUM")) || (matchT("ID") && operador())) {
-      return true;
-    }
-
-    erro("Incremento invalido: " + token);
-    return false;
-  }
-
-  // ----------------------------Verificacao Dados----------------------------
+  // --------------------Verificacao Dados--------------------
   private boolean matchLFirst(String lexema) {
     System.out.println("\nMatchLFirst");
     if (token.getLexema().equals(lexema)) {

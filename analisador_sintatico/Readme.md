@@ -29,7 +29,7 @@ flutuante -> num⁺.num⁺
 string -> "(id+num+flutuante)"
 ```
 
-### EOSeuNegocio - For
+### EOSeuNegocio - For -> Tem coisa errada ainda
 
 ```txt
 eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
@@ -55,7 +55,7 @@ flutuante -> num⁺.num⁺ | ε
 string -> "(id+num+flutuante)"
 ```
 
-### FazDeNovo - While
+### FazDeNovo - While -> Tem coisa errada ainda
 
 ```txt
 while -> fazDeNovo ( condicao ) { expressao }
@@ -103,7 +103,7 @@ comentario -> # texto
 texto -> [a-zA-Z0-9]⁺
 ```
 
-### OlhaSo -> Print
+### OlhaSo -> Print -> Ok
 
 ```txt
 print -> olhaSo ( texto ) ;

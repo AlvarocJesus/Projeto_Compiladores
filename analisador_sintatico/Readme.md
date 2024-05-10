@@ -55,7 +55,7 @@ flutuante -> num⁺.num⁺ | ε
 string -> "(id+num+flutuante)"
 ```
 
-### FazDeNovo - While -> Tem coisa errada ainda
+### FazDeNovo - While -> Ok com ressalvas
 
 ```txt
 while -> fazDeNovo ( condicao ) { expressao }

@@ -160,14 +160,12 @@ public class teste {
         firstToken();
         return true;
       }
-    } /*
-       * else if (matchLFirst("eOSeuNegocio")) {
-       * if (eOSeuNegocio()) {
-       * firstToken();
-       * return true;
-       * }
-       * }
-       */ else if (matchLFirst("fazDeNovo")) {
+    } else if (matchLFirst("eOSeuNegocio")) {
+       if (eOSeuNegocio()) {
+       firstToken();
+       return true;
+       }
+    } else if (matchLFirst("fazDeNovo")) {
       if (fazDeNovo()) {
         firstToken();
         return true;
@@ -272,7 +270,7 @@ public class teste {
   }
 
   private boolean variavel() {
-    if ((matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING"))
+    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")
         || (matchL("(") && mathExpressao() && matchL(")"))) {
       return true;
     }
@@ -313,11 +311,21 @@ public class teste {
   }
 
   private boolean expressao() {
-    if ((variavel() && matchL("=") && variavel() && matchL(";")) || (mathExpressao() && matchL(";"))) {
+    if ((matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
       return true;
     }
 
-    erro("Expressao invalida: " + token);
+    /* Assim da erro
+    if ((mathExpressao() && matchL(";")) || (matchT("ID") && operador() && matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
+      return true;
+    } */
+
+    /* Assim tbm da erro
+    if ((variavel() && matchL("=") && variavel() && matchL(";")) || (matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";"))) {
+      return true;
+    } */
+
+    erro("Expressao invalida" + token);
     return false;
   }
 

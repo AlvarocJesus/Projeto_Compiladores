@@ -73,7 +73,7 @@ operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
 id -> [a-zA-Z]⁺
 num -> [0-9]⁺
 flutuante -> num.num
-string -> " (id + num + flutuante) "
+string -> "\"" (id | num | flutuante) "\""
 ```
 
 ### Atribuição Variável -> Ok

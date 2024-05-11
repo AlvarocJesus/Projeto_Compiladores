@@ -161,10 +161,10 @@ public class teste {
         return true;
       }
     } else if (matchLFirst("eOSeuNegocio")) {
-       if (eOSeuNegocio()) {
-       firstToken();
-       return true;
-       }
+      if (eOSeuNegocio()) {
+        firstToken();
+        return true;
+      }
     } else if (matchLFirst("fazDeNovo")) {
       if (fazDeNovo()) {
         firstToken();
@@ -301,7 +301,8 @@ public class teste {
     System.out.println("\nOperador");
     System.out.println("Token: " + token);
     if (matchL("<") || matchL(">") || matchL("<=") || matchL(">=") || matchL("==") || matchL("!=") || matchL("||")
-        || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")) {
+        || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")
+        || matchL("=")) {
       System.out.println("\nOperador: " + token.getLexema());
       return true;
     }
@@ -311,19 +312,26 @@ public class teste {
   }
 
   private boolean expressao() {
-    if ((matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
+    if ((matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";"))
+        || (variavel() && matchL("=") && variavel() && matchL(";"))) {
       return true;
     }
 
-    /* Assim da erro
-    if ((mathExpressao() && matchL(";")) || (matchT("ID") && operador() && matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
-      return true;
-    } */
+    /*
+     * Assim da erro
+     * if ((mathExpressao() && matchL(";")) || (matchT("ID") && operador() &&
+     * matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
+     * return true;
+     * }
+     */
 
-    /* Assim tbm da erro
-    if ((variavel() && matchL("=") && variavel() && matchL(";")) || (matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";"))) {
-      return true;
-    } */
+    /*
+     * Assim tbm da erro
+     * if ((variavel() && matchL("=") && variavel() && matchL(";")) || (matchT("ID")
+     * && operador() && matchL(";")) || (mathExpressao() && matchL(";"))) {
+     * return true;
+     * }
+     */
 
     erro("Expressao invalida" + token);
     return false;
@@ -384,12 +392,13 @@ public class teste {
     if (matchT("ID") && operador()) {
       if (matchT("NUM")) {
         return true;
+      } else {
+        return true; // ε
       }
-      erro("Incremento invalido: " + token);
-      return false;
     }
 
-    return true; // ε
+    erro("Incremento invalido: " + token);
+    return false;
   }
 
   // --------------------Verificacao Dados--------------------

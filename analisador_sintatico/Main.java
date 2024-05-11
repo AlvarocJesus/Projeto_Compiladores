@@ -74,20 +74,22 @@ public class Main {
     // tokens.add(new Token("FIM", ";", 18, 4));
     // tokens.add(new Token("RCHAVE", "}", 19, 1));
 
-    /* tokens.add(new Token("RESERVADA_FAZDENOVO", "fazDeNovo", 21, 1));
-    tokens.add(new Token("LPAREN", "(", 21, 9));
-    tokens.add(new Token("ID", "y", 21, 9));
-    tokens.add(new Token("IGUAL", "==", 21, 10));
-    tokens.add(new Token("NUM", "5", 21, 12));
-    tokens.add(new Token("RPAREN", ")", 21, 12));
-    tokens.add(new Token("LCHAVE", "{", 21, 13));
-    tokens.add(new Token("ID", "y", 22, 2));
-    tokens.add(new Token("ATRIBUICAO", "=", 22, 3));
-    tokens.add(new Token("NUM", "5", 22, 4));
-    tokens.add(new Token("FIM", ";", 22, 4));
-    tokens.add(new Token("RCHAVE", "}", 23, 1)); */
+    /*
+     * tokens.add(new Token("RESERVADA_FAZDENOVO", "fazDeNovo", 21, 1));
+     * tokens.add(new Token("LPAREN", "(", 21, 9));
+     * tokens.add(new Token("ID", "y", 21, 9));
+     * tokens.add(new Token("IGUAL", "==", 21, 10));
+     * tokens.add(new Token("NUM", "5", 21, 12));
+     * tokens.add(new Token("RPAREN", ")", 21, 12));
+     * tokens.add(new Token("LCHAVE", "{", 21, 13));
+     * tokens.add(new Token("ID", "y", 22, 2));
+     * tokens.add(new Token("ATRIBUICAO", "=", 22, 3));
+     * tokens.add(new Token("NUM", "5", 22, 4));
+     * tokens.add(new Token("FIM", ";", 22, 4));
+     * tokens.add(new Token("RCHAVE", "}", 23, 1));
+     */
 
-    tokens.add(new Token("COMENTARIO", "# Teste 1 do nosso for", 25, 1));
+    // tokens.add(new Token("COMENTARIO", "# Teste 1 do nosso for", 25, 1));
     /*
      * 
      * tokens.add(new Token("RESERVADA_EOSEUNEGOCIO", "eOSeuNegocio", 26, 1));
@@ -112,7 +114,7 @@ public class Main {
      * tokens.add(new Token("RCHAVE", "}", 28, 1));
      */
 
-    // tokens.add(new Token("COMENTARIO", "# Teste 2 do nosso for", 30, 1));
+    tokens.add(new Token("COMENTARIO", "# Teste 2 do nosso for", 30, 1));
 
     tokens.add(new Token("RESERVADA_EOSEUNEGOCIO", "eOSeuNegocio", 31, 1));
     tokens.add(new Token("LPAREN", "(", 31, 12));
@@ -137,25 +139,25 @@ public class Main {
     tokens.add(new Token("FIM", ";", 32, 6));
     tokens.add(new Token("RCHAVE", "}", 33, 1));
 
-    
-    //  tokens.add(new Token("RESERVADA_FAZDENOVO", "fazDeNovo", 12, 1));
-    //  tokens.add(new Token("LPAREN", "(", 12, 9));
-    //  tokens.add(new Token("ID", "x", 12, 9));
-    //  tokens.add(new Token("DIFERENTE", "!=", 12, 10));
-    //  tokens.add(new Token("ID", "y", 12, 12));
-    //  tokens.add(new Token("RPAREN", ")", 12, 12));
-    //  tokens.add(new Token("LCHAVE", "{", 12, 12));
-    //  tokens.add(new Token("ID", "x", 14, 2));
-    //  tokens.add(new Token("INCREMENTO_SOMA", "++", 14, 3));
-    //  tokens.add(new Token("FIM", ";", 14, 5));
-    //  tokens.add(new Token("RCHAVE", "}", 15, 1));
-    
+    // tokens.add(new Token("RESERVADA_FAZDENOVO", "fazDeNovo", 12, 1));
+    // tokens.add(new Token("LPAREN", "(", 12, 9));
+    // tokens.add(new Token("ID", "x", 12, 9));
+    // tokens.add(new Token("DIFERENTE", "!=", 12, 10));
+    // tokens.add(new Token("ID", "y", 12, 12));
+    // tokens.add(new Token("RPAREN", ")", 12, 12));
+    // tokens.add(new Token("LCHAVE", "{", 12, 12));
+    // tokens.add(new Token("ID", "x", 14, 2));
+    // tokens.add(new Token("INCREMENTO_SOMA", "++", 14, 3));
+    // tokens.add(new Token("FIM", ";", 14, 5));
+    // tokens.add(new Token("RCHAVE", "}", 15, 1));
 
-    /* tokens.add(new Token("RESERVADA_OLHASO", "olhaSo", 13, 2));
-    tokens.add(new Token("LPAREN", "(", 13, 7));
-    tokens.add(new Token("STRING", "Dentro do nosso while", 13, 7));
-    tokens.add(new Token("RPAREN", ")", 13, 31));
-    tokens.add(new Token("FIM", ";", 13, 31)); */
+    /*
+     * tokens.add(new Token("RESERVADA_OLHASO", "olhaSo", 13, 2));
+     * tokens.add(new Token("LPAREN", "(", 13, 7));
+     * tokens.add(new Token("STRING", "Dentro do nosso while", 13, 7));
+     * tokens.add(new Token("RPAREN", ")", 13, 31));
+     * tokens.add(new Token("FIM", ";", 13, 31));
+     */
 
     tokens.add(new Token("EOF", "$", 33, 2));
 

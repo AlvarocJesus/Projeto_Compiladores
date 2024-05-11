@@ -117,7 +117,8 @@ if () {
 ```
 
 ## Criadores
-
-Álvaro Coelho Jesus
-Renan Guastella Piva
-Melissa
+|Nome|RA|
+|----|----|
+|Álvaro Coelho Jesus|22221002-3|
+|Renan Guastella Piva|22221002-3|
+|Melissa|22221002-3|

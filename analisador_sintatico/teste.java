@@ -195,7 +195,6 @@ public class teste {
 
   // --------------------Comentário--------------------
   private boolean comentario() {
-    System.out.println("\nComentario");
     if (matchT("COMENTARIO")) {
       return true;
     }
@@ -298,12 +297,9 @@ public class teste {
   }
 
   private boolean operador() {
-    System.out.println("\nOperador");
-    System.out.println("Token: " + token);
     if (matchL("<") || matchL(">") || matchL("<=") || matchL(">=") || matchL("==") || matchL("!=") || matchL("||")
         || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")
         || matchL("=")) {
-      System.out.println("\nOperador: " + token.getLexema());
       return true;
     }
 
@@ -403,7 +399,6 @@ public class teste {
 
   // --------------------Verificacao Dados--------------------
   private boolean matchLFirst(String lexema) {
-    System.out.println("\nMatchLFirst");
     if (token.getLexema().equals(lexema)) {
       return true;
     }
@@ -420,13 +415,8 @@ public class teste {
   }
 
   private boolean matchL(String lexema) {
-    System.out.println("\nMatchL");
-    System.out.println("Lexema: " + lexema);
-    System.out.println("Token: " + token);
     if (token.getLexema().equals(lexema)) {
-      System.out.println("Lexema igual: " + lexema + " - " + token.getLexema());
       token = nextToken();
-      System.out.println("Novo token: " + token);
       return true;
     }
 

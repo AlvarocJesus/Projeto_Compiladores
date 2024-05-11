@@ -1,18 +1,19 @@
 # Compilador da Linguagem Meme Fei Language
 
 ## Dicionario
+
 | Comando Original | Nossa Linguagem |
-| ----- | -----|
-| if | depende |
-| else | planoB |
-| for | eOSeuNegocio |
-| while | fazDeNovo |
-| int | taOk |
-| float | gaviao |
-| string | caixaPreta |
-| Entrada de dados | receba |
-| Saida de dados | olhaSo |
-| break | cheeega |
+| ---------------- | --------------- |
+| if               | depende         |
+| else             | planoB          |
+| for              | eOSeuNegocio    |
+| while            | fazDeNovo       |
+| int              | taOk            |
+| float            | gaviao          |
+| string           | caixaPreta      |
+| Entrada de dados | receba          |
+| Saida de dados   | olhaSo          |
+| break            | cheeega         |
 
 ## Executar Compilador
 
@@ -29,7 +30,9 @@ Se estiver em um ambiente Linux ou Unix execute o seguinte arquivo executável:
 ```
 
 ## Exemplos de código
+
 - Variaveis
+
 ```
 # Int
 taOk x = 5;
@@ -42,6 +45,7 @@ caixaPreta nome = "Seu incrivel nome aqui";
 ```
 
 - Operadores
+
 ```
 +
 -
@@ -55,11 +59,13 @@ caixaPreta nome = "Seu incrivel nome aqui";
 ```
 
 - Comentario
+
 ```
 # Comentario increvel
 ```
 
 - For
+
 ```
 for (taOk i = 0; i < y; i++) {
   olhaSo(i);
@@ -67,6 +73,7 @@ for (taOk i = 0; i < y; i++) {
 ```
 
 - While
+
 ```
 while() {
 
@@ -74,6 +81,7 @@ while() {
 ```
 
 - Função
+
 ```
 soma(taOk num1, taOk num2) {
   olhaSo(num1 + num2);
@@ -81,6 +89,7 @@ soma(taOk num1, taOk num2) {
 ```
 
 - Classe
+
 ```
 soma {
   taOk num1;
@@ -98,6 +107,7 @@ soma {
 ```
 
 - If/Else
+
 ```
 if () {
 
@@ -117,8 +127,9 @@ if () {
 ```
 
 ## Criadores
-|Nome|RA|
-|----|----|
-|Álvaro Coelho Jesus|22221002-3|
-|Renan Guastella Piva|22221002-3|
-|Melissa|22221002-3|
+
+| Nome                 | RA         |
+| -------------------- | ---------- |
+| Álvaro Coelho Jesus  | 22221002-3 |
+| Renan Guastella Piva | 22221029-6 |
+| Melissa              | 22221002-3 |

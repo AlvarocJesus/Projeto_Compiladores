@@ -111,14 +111,14 @@ public class teste {
 import java.util.List;
 
 public class teste {
-  List<Token> tokens;
-  Token token;
+  List<TokenSintatico> tokens;
+  TokenSintatico token;
 
-  public teste(List<Token> tokens) {
+  public teste(List<TokenSintatico> tokens) {
     this.tokens = tokens;
   }
 
-  public Token nextToken() {
+  public TokenSintatico nextToken() {
     if (tokens.size() > 0)
       return tokens.remove(0);
 

@@ -1,10 +1,14 @@
+package backup;
+
 import java.util.List;
 
-public class Parser {
+import Token;
+
+public class ParserCopy {
   List<Token> tokens;
   Token token;
 
-  public Parser(List<Token> tokens) {
+  public ParserCopy(List<Token> tokens) {
     this.tokens = tokens;
   }
 

@@ -1,25 +1,26 @@
-import java.util.List;
+package backup;
 
+import java.util.List;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Main {
+public class MainCopy {
     public static void main(String[] args) throws IOException {
-        List<Token> tokens = null;
+        List<TokenSintatico> tokens = null;
 
-        String codigoFonte = new Main().Arquivo();
+        String codigoFonte = new MainCopy().Arquivo();
 
         Lexer lexer = new Lexer(codigoFonte);
         tokens = lexer.getTokens();
 
-        for (Token token : tokens) {
+        for (TokenSintatico token : tokens) {
             System.out.println(token);
         }
 
         System.out.println("\nAnalisador Sintático\n");
-        Parser parser = new Parser(tokens);
+        ParserCopy parser = new Parser(tokens);
         parser.main();
     }
 

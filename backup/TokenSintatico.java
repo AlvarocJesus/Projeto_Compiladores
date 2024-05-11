@@ -1,9 +1,11 @@
-public class Token {
+package backup;
+
+public class TokenSintatico {
     private String lexema;
     private String tipo;
     private int linha, column;
 
-    public Token(String tipo, String lexema, int linha, int column) {
+    public TokenSintatico(String tipo, String lexema, int linha, int column) {
         this.lexema = lexema;
         this.tipo = tipo;
         this.linha = linha;

@@ -25,7 +25,6 @@ public class Main {
      * }
      */
 
-    System.out.println("\nAnalisador Sintático\n");
     Parser parser = new Parser(tokens);
     parser.main();
   }

@@ -29,7 +29,7 @@ flutuante -> num⁺.num⁺
 string -> "(id+num+flutuante)"
 ```
 
-### EOSeuNegocio - For -> Tem coisa errada ainda
+### EOSeuNegocio - For -> Ok com ressalvas
 
 ```txt
 eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
@@ -79,7 +79,7 @@ string -> "\"" (id | num | flutuante) "\""
 ### Atribuição Variável -> Ok
 
 ```txt
-atribVariavel -> tipoVariavel variavel "=" ( variavel || expressao ) ";"
+atribVariavel -> tipoVariavel variavel "=" ( variavel | expressao ) ";"
 tipoVariavel -> taOk | gaviao | caixaPreta
 variavel -> id | num | flutuante | string | ( mathExpressao )
 expressao -> variavel operador mathExpressao ";"

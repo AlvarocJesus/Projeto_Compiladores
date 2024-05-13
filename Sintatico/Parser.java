@@ -1,6 +1,7 @@
 package Sintatico;
 
 import java.util.List;
+
 import Lexico.Token;
 
 public class Parser {
@@ -26,11 +27,12 @@ public class Parser {
   }
 
   public void main() {
+    System.out.println("public class Main { public static void main(String[] args) {");
     token = nextToken();
 
     if (firstToken()) {
-      if (matchT("EOF")) {
-        System.out.println("Sintaticamente correto");
+      if (matchT("EOF", "")) {
+        System.out.println("}}");
       } else {
         erro("Fudeu de vez!!!!");
       }
@@ -78,7 +80,7 @@ public class Parser {
 
   // --------------------Atribuição Variavel--------------------
   private boolean atribVariavel() {
-    if (tipoVariavel() && variavel() && matchL("=") && variavel() && matchL(";")) {
+    if (tipoVariavel() && variavel() && matchL("=", "=") && (variavel() || expressao()) && matchL(";", ";")) {
       return true;
     }
 
@@ -88,7 +90,7 @@ public class Parser {
 
   // --------------------Comentário--------------------
   private boolean comentario() {
-    if (matchT("COMENTARIO")) {
+    if (matchT("COMENTARIO", token.getLexema().replace("#", "//") + "\n")) {
       return true;
     }
 
@@ -98,7 +100,8 @@ public class Parser {
 
   // --------------------Depende--------------------
   private boolean depende() {
-    if (matchL("depende") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")
+    if (matchL("depende", "if") && matchL("(", "(") && condicao() && matchL(")", ")") && matchL("{", "{") && expressao()
+        && matchL("}", "}")
         && planoB()) {
       return true;
     }
@@ -108,8 +111,8 @@ public class Parser {
   }
 
   private boolean planoB() {
-    if (matchL("planoB")) {
-      if (matchL("{") && expressao() && matchL("}")) {
+    if (matchL("planoB", "else")) {
+      if (matchL("{", "{") && expressao() && matchL("}", "}")) {
         return true;
       }
       erro("PlanoB invalido: " + token);
@@ -121,9 +124,10 @@ public class Parser {
 
   // --------------------EOSeuNegocio--------------------
   private boolean eOSeuNegocio() {
-    if (matchL("eOSeuNegocio") && matchL("(") && varContador()
-        && matchL(";") && condicao() && matchL(";") && incremento() && matchL(")") && matchL("{") && expressao()
-        && matchL("}")) {
+    if (matchL("eOSeuNegocio", "for") && matchL("(", "(") && varContador()
+        && matchL(";", ";") && condicao() && matchL(";", ";") && incremento() && matchL(")", ")") && matchL("{", "{")
+        && expressao()
+        && matchL("}", "}")) {
       return true;
     }
 
@@ -133,7 +137,8 @@ public class Parser {
 
   // --------------------FazDeNovo--------------------
   private boolean fazDeNovo() {
-    if (matchL("fazDeNovo") && matchL("(") && condicao() && matchL(")") && matchL("{") && expressao() && matchL("}")) {
+    if (matchL("fazDeNovo", "while") && matchL("(", "(") && condicao() && matchL(")", ")") && matchL("{", "{")
+        && expressao() && matchL("}", "}")) {
       return true;
     }
 
@@ -143,7 +148,8 @@ public class Parser {
 
   // --------------------OlhaSo--------------------
   private boolean olhaSo() {
-    if (matchL("olhaSo") && matchL("(") && variavel() && matchL(")") && matchL(";")) {
+    if (matchL("olhaSo", "System.out.println") && matchL("(", "(") && variavel() && matchL(")", ")")
+        && matchL(";", ";")) {
       return true;
     }
 
@@ -153,7 +159,7 @@ public class Parser {
 
   // --------------------Funcoes intermediarias--------------------
   private boolean tipoVariavel() {
-    if (matchL("taOk") || matchL("gaviao") || matchL("caixaPreta")) {
+    if (matchL("taOk", "int ") || matchL("gaviao", "double ") || matchL("caixaPreta", "String ")) {
       return true;
     }
 
@@ -162,8 +168,9 @@ public class Parser {
   }
 
   private boolean variavel() {
-    if (matchT("ID") || matchT("NUM") || matchT("FLUTUANTE") || matchT("STRING")
-        || (matchL("(") && mathExpressao() && matchL(")"))) {
+    if (matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema())
+        || matchT("STRING", token.getLexema())
+        || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
       return true;
     }
 
@@ -190,9 +197,21 @@ public class Parser {
   }
 
   private boolean operador() {
-    if (matchL("<") || matchL(">") || matchL("<=") || matchL(">=") || matchL("==") || matchL("!=") || matchL("||")
-        || matchL("&&") || matchL("--") || matchL("++") || matchL("+") || matchL("-") || matchL("*") || matchL("/")
-        || matchL("=")) {
+    if (matchL("<", "<")
+        || matchL(">", ">")
+        || matchL("<=", "<=")
+        || matchL(">=", ">=")
+        || matchL("==", "==")
+        || matchL("!=", "!=")
+        || matchL("||", "||")
+        || matchL("&&", "&&")
+        || matchL("--", "--")
+        || matchL("++", "++")
+        || matchL("+", "+")
+        || matchL("-", "-")
+        || matchL("*", "*")
+        || matchL("/", "/")
+        || matchL("=", "=")) {
       return true;
     }
 
@@ -201,8 +220,9 @@ public class Parser {
   }
 
   private boolean expressao() {
-    if ((matchT("ID") && operador() && matchL(";")) || (mathExpressao() && matchL(";"))
-        || (variavel() && matchL("=") && variavel() && matchL(";"))) {
+    if ((tipoVariavel() && matchT("ID", token.getLexema()) && operador() && variavel() && matchL(";", ";"))
+        || (mathExpressao() && matchL(";", ";"))
+        || (variavel() && matchL("=", "=") && variavel() && matchL(";", ";"))) {
       return true;
     }
 
@@ -236,7 +256,7 @@ public class Parser {
   }
 
   private boolean mathExpressaoLinha() {
-    if (matchL("+") || matchL("-") || matchL("++")) {
+    if (matchL("+", "+") || matchL("-", "-") || matchL("++", "++")) {
       if (math() && mathExpressaoLinha()) {
         return true;
       }
@@ -257,7 +277,7 @@ public class Parser {
   }
 
   private boolean mathLinha() {
-    if (matchL("*") || matchL("/")) {
+    if (matchL("*", "*") || matchL("/", "/")) {
       if (variavel() && mathLinha()) {
         return true;
       }
@@ -269,7 +289,7 @@ public class Parser {
   }
 
   private boolean varContador() {
-    if (tipoVariavel() && variavel() && matchL("=") && matchT("NUM")) {
+    if (tipoVariavel() && variavel() && matchL("=", "=") && matchT("NUM", token.getLexema())) {
       return true;
     }
 
@@ -278,8 +298,8 @@ public class Parser {
   }
 
   private boolean incremento() {
-    if (matchT("ID") && operador()) {
-      if (matchT("NUM")) {
+    if (matchT("ID", token.getLexema()) && operador()) {
+      if (matchT("NUM", token.getLexema())) {
         return true;
       } else {
         return true; // ε
@@ -307,8 +327,9 @@ public class Parser {
     return false;
   }
 
-  private boolean matchL(String lexema) {
+  private boolean matchL(String lexema, String newCode) {
     if (token.getLexema().equals(lexema)) {
+      traduz(newCode);
       token = nextToken();
       return true;
     }
@@ -316,8 +337,9 @@ public class Parser {
     return false;
   }
 
-  private boolean matchT(String tipo) {
+  private boolean matchT(String tipo, String newCode) {
     if (token.getTipo().equals(tipo)) {
+      traduz(newCode);
       token = nextToken();
       return true;
     }
@@ -325,4 +347,7 @@ public class Parser {
     return false;
   }
 
+  private void traduz(String code) {
+    System.out.print(code);
+  }
 }

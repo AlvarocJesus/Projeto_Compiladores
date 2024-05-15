@@ -1,6 +1,8 @@
-public class MainFinal {
+public class Main {
   public static void main(String[] args) {
-    // Vai toma no cu
+    int x = 1;
+    int y = 1;// Soma
     int a = x * y;
+    System.out.println(a);
   }
 }

@@ -16,7 +16,7 @@ planoB -> planoB { expressao } | ε
 condicao -> variavel operador variavel
 variavel -> id | num | flutuante | string | ( mathExpressao )
 operador -> ">" | "<" | "==" | "!=" | "&&" | "||" | "+" | "-" | "\" | "*" | "/" | "="
-expressao -> variavel "=" variavel ";" | mathExpressao ";"
+expressao -> first ";"
 
 mathExpressao -> math mathExpressao’
 mathExpressao’ -> +math mathExpressao’ | -math mathExpressao’ | ε
@@ -79,15 +79,16 @@ string -> "\"" (id | num | flutuante) "\""
 ### Atribuição Variável -> Ok
 
 ```txt
-atribVariavel -> tipoVariavel variavel "=" ( variavel | expressao ) ";"
+atribVariavel -> tipoVariavel variavel "=" mathExpressao ";"
 tipoVariavel -> taOk | gaviao | caixaPreta
-variavel -> id | num | flutuante | string | ( mathExpressao )
-expressao -> variavel operador mathExpressao ";"
+variavel -> id | num | flutuante | string
 
 mathExpressao -> TmathExpressao’
 mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
 math -> Fmath´
 math´ -> *Fmath´ | /Fmath´ | ε
+
+F -> id | num | flutuante | ( mathExpressao )
 
 id -> [a-zA-Z]⁺
 num -> [0-9]⁺

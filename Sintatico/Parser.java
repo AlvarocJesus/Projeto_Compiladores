@@ -80,7 +80,7 @@ public class Parser {
 
   // --------------------Atribuição Variavel--------------------
   private boolean atribVariavel() {
-    if (tipoVariavel() && variavel() && matchL("=", "=") && (variavel() || expressao()) && matchL(";", ";")) {
+    if (tipoVariavel() && variavel() && matchL("=", "=") && mathExpressao() && matchL(";", ";")) {
       return true;
     }
 
@@ -268,7 +268,7 @@ public class Parser {
   }
 
   private boolean math() {
-    if (variavel() && mathLinha()) {
+    if (F() && mathLinha()) {
       return true;
     }
 
@@ -278,14 +278,23 @@ public class Parser {
 
   private boolean mathLinha() {
     if (matchL("*", "*") || matchL("/", "/")) {
-      if (variavel() && mathLinha()) {
+      if (F() && mathLinha()) {
         return true;
       }
-      erro("Math 1 invalida: " + token);
+      erro("Math Linha invalida: " + token);
       return false;
     }
 
     return true; // ε
+  }
+
+  private boolean F() {
+    if(matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema()) || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
+      return true;
+    }
+
+    erro("Regra F invalido: " + token);
+    return false;
   }
 
   private boolean varContador() {

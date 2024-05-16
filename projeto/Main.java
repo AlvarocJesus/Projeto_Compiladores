@@ -19,9 +19,11 @@ public class Main {
     Lexer lexer = new Lexer(codigoFonte);
     tokens = lexer.getTokens();
 
-    for (Token token : tokens) {
-      System.out.println(token);
-    }
+    /*
+     * for (Token token : tokens) {
+     * System.out.println(token);
+     * }
+     */
 
     Parser parser = new Parser(tokens);
     parser.main();

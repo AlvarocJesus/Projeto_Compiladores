@@ -1,37 +1,35 @@
-/* public class Main {
-  public static void main(String[] args) {
-    int x = 1;
-    int y = 1;
-    int z = 3;// Soma
-    int a = (x + y) * z;
-    System.out.println(a);// Printar um numero
-    System.out.println(3);
-  }
-} */
-
 public class Main {
   public static void main(String[] args) {
-  int x=1;
-  int y=1;
-  int z=3;
-  // Soma
-
-  int a=(x+y)*z;System.out.println(a);
-  // Printar um numero
-  System.out.println(3);
-  
-  // A partir daqui é o segundo teste
-
-  double x=1.1;
-  int y=5;
-  double z=2.2;
-  int p=10;
-  
-  //essa é uma soma
-  int result=x*y+z;
-  
-  // esse é for
-  if(result>2){
-    System.out.println(result);
-  }else{
-    if(result||2)
+    int b = 1;
+    int c = 1;
+    int d = 3;
+    String texto = "É pra ser uma string";
+    int soma = (b + c) * d;
+    System.out.println(soma);
+    System.out.println(3);
+    System.out.println("Funcionou com string");
+    System.out.println(texto);
+    double x = 1.1;
+    int y = 5;
+    double z = 2.2;
+    int p = 10;
+    double result = x * y + z;
+    if (result > 2) {
+      System.out.println(result);
+    } else {
+      if (result <= 2) {
+        System.out.println(result);
+      }
+    }
+    if (result == 2) {
+      System.out.println("Entrou no nosso comando if");
+    }
+    while (y == 5) {
+      int aux = y + 1;
+      System.out.println(aux);
+    }
+    for (int i = 0; i < 5; i++) {
+      System.out.println("Deu bom");
+    }
+  }
+}

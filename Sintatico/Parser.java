@@ -92,7 +92,7 @@ public class Parser {
 
   // --------------------Comentário--------------------
   private boolean comentario() {
-    if (matchT("COMENTARIO", token.getLexema().replace("#", "//") + "\n")) {
+    if (matchT("COMENTARIO", "")) {
       return true;
     }
 
@@ -191,11 +191,13 @@ public class Parser {
 
   private boolean condicao() {
     if (variavel() && operador() && variavel()) {
-      // if (operador() && condicao()) {
-      // return true;
-      // } else {
-      return true; // ε
-      // }
+      if (matchL("&&", "&&") || matchL("||", "||")) {
+        if (condicao()) {
+          return true;
+        }
+      } else {
+        return true; // ε
+      }
     }
 
     erro("Condicao invalida: " + token);
@@ -269,6 +271,7 @@ public class Parser {
 
   private boolean F() {
     if (matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema())
+        || matchT("STRING", token.getLexema())
         || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
       return true;
     }

@@ -8,7 +8,12 @@ public class MathOperator extends AFD {
         switch (code.current()) {
             case '-':
                 code.next();
-                return new Token("SUB", "-", linha, column);
+                if (code.current() == '-') {
+                    code.next();
+                    return new Token("DECREMENTO", "--", linha, column);
+                } else {
+                    return new Token("SUB", "-", linha, column);
+                }
             case '*':
                 code.next();
                 return new Token("MUL", "*", linha, column);
@@ -38,10 +43,20 @@ public class MathOperator extends AFD {
                 return new Token("FIM", ";", linha, column);
             case '>':
                 code.next();
-                return new Token("MAIORQ", ">", linha, column);
+                if (code.current() == '=') {
+                    code.next();
+                    return new Token("MAIORIGUAL", "<=", linha, column);
+                } else {
+                    return new Token("MAIORQ", ">", linha, column);
+                }
             case '<':
                 code.next();
-                return new Token("MENORQ", "<", linha, column);
+                if (code.current() == '=') {
+                    code.next();
+                    return new Token("MENORIGUAL", "<=", linha, column);
+                } else {
+                    return new Token("MENORQ", "<", linha, column);
+                }
             case '&':
                 code.next();
                 if (code.current() == '&') {

@@ -32,7 +32,7 @@ public class Main {
   public String Arquivo() throws IOException {
     String data = new String(
         Files.readAllBytes(Paths
-            .get("/workspaces/Projeto_Compiladores/projeto/teste.me")),
+            .get("C://Users/AlvaroCJesus/OneDrive - FEI/FEI/Ciclo_6/Compiladores/projeto/projeto/teste.me")),
         StandardCharsets.UTF_8);
     return data;
   }

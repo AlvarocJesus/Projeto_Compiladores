@@ -11,9 +11,9 @@ first -> depende first | fazDeNovo first | eOSeuNegocio first | olhaSo first | v
 ### Depende - IF -> Ok
 
 ```txt
-depende -> depende ( condicao ) { expressao } planoB
-planoB -> planoB { expressao } | ε
-condicao -> variavel operador variavel
+depende -> depende ( condicao ) { first } planoB
+planoB -> planoB { first } | ε
+condicao -> [variavel operador variavel]⁺ | ε
 variavel -> id | num | flutuante | string | ( mathExpressao )
 operador -> ">" | "<" | "==" | "!=" | "&&" | "||" | "+" | "-" | "\" | "*" | "/" | "="
 expressao -> first ";"

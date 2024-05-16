@@ -20,6 +20,14 @@ public class Token {
         return tipo;
     }
 
+    public int getLinha() {
+        return linha;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
     @Override
     public String toString() {
         return "<" + tipo + ", " + lexema + ", " + linha + ", " + column + ">";

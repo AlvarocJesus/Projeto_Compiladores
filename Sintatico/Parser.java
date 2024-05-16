@@ -20,9 +20,11 @@ public class Parser {
   }
 
   private void erro(String regra) {
-    System.out.println("Erro na regra: " + regra);
+    System.out.println("\nErro na regra: " + regra);
     System.out.println("Token inválido: " + token);
     System.out.println("token invalido: " + token.getLexema());
+    System.out.println("\nErro na regra: " + regra + " que esta com o token inválido: " + token + " na linha: "
+        + token.getLinha() + " e coluna: " + token.getColumn());
     System.exit(0); // encerra parser
   }
 
@@ -100,7 +102,8 @@ public class Parser {
 
   // --------------------Depende--------------------
   private boolean depende() {
-    if (matchL("depende", "if") && matchL("(", "(") && condicao() && matchL(")", ")") && matchL("{", "{") && expressao()
+    if (matchL("depende", "if") && matchL("(", "(") && condicao() && matchL(")", ")") && matchL("{", "{")
+        && firstToken()
         && matchL("}", "}")
         && planoB()) {
       return true;
@@ -112,7 +115,7 @@ public class Parser {
 
   private boolean planoB() {
     if (matchL("planoB", "else")) {
-      if (matchL("{", "{") && expressao() && matchL("}", "}")) {
+      if (matchL("{", "{") && firstToken() && matchL("}", "}")) {
         return true;
       }
       erro("PlanoB invalido: " + token);
@@ -126,7 +129,7 @@ public class Parser {
   private boolean eOSeuNegocio() {
     if (matchL("eOSeuNegocio", "for") && matchL("(", "(") && varContador()
         && matchL(";", ";") && condicao() && matchL(";", ";") && incremento() && matchL(")", ")") && matchL("{", "{")
-        && expressao()
+        && firstToken()
         && matchL("}", "}")) {
       return true;
     }
@@ -138,7 +141,7 @@ public class Parser {
   // --------------------FazDeNovo--------------------
   private boolean fazDeNovo() {
     if (matchL("fazDeNovo", "while") && matchL("(", "(") && condicao() && matchL(")", ")") && matchL("{", "{")
-        && expressao() && matchL("}", "}")) {
+        && firstToken() && matchL("}", "}")) {
       return true;
     }
 
@@ -169,8 +172,7 @@ public class Parser {
 
   private boolean variavel() {
     if (matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema())
-        || matchT("STRING", token.getLexema())
-        || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
+        || matchT("STRING", token.getLexema())) {
       return true;
     }
 
@@ -189,7 +191,11 @@ public class Parser {
 
   private boolean condicao() {
     if (variavel() && operador() && variavel()) {
-      return true;
+      // if (operador() && condicao()) {
+      // return true;
+      // } else {
+      return true; // ε
+      // }
     }
 
     erro("Condicao invalida: " + token);
@@ -216,33 +222,6 @@ public class Parser {
     }
 
     erro("Operador invalido: " + token);
-    return false;
-  }
-
-  private boolean expressao() {
-    if ((tipoVariavel() && matchT("ID", token.getLexema()) && operador() && variavel() && matchL(";", ";"))
-        || (mathExpressao() && matchL(";", ";"))
-        || (variavel() && matchL("=", "=") && variavel() && matchL(";", ";"))) {
-      return true;
-    }
-
-    /*
-     * Assim da erro
-     * if ((mathExpressao() && matchL(";")) || (matchT("ID") && operador() &&
-     * matchL(";")) || (variavel() && matchL("=") && variavel() && matchL(";"))) {
-     * return true;
-     * }
-     */
-
-    /*
-     * Assim tbm da erro
-     * if ((variavel() && matchL("=") && variavel() && matchL(";")) || (matchT("ID")
-     * && operador() && matchL(";")) || (mathExpressao() && matchL(";"))) {
-     * return true;
-     * }
-     */
-
-    erro("Expressao invalida" + token);
     return false;
   }
 
@@ -289,7 +268,8 @@ public class Parser {
   }
 
   private boolean F() {
-    if(matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema()) || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
+    if (matchT("ID", token.getLexema()) || matchT("NUM", token.getLexema()) || matchT("FLUTUANTE", token.getLexema())
+        || (matchL("(", "(") && mathExpressao() && matchL(")", ")"))) {
       return true;
     }
 

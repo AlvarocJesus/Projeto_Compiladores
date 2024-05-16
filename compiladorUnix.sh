@@ -1,7 +1,9 @@
-echo "Iniciando Compilador Unix"
+#!/bin/bash
 
-javac -d bin src/compilador/*.java
+javac */*.java
 
-java -cp bin compilador.Compilador
+java /projeto/Main >> Main.java
 
-echo "Compilador Unix Finalizado"
+javac Main.java
+
+java Main

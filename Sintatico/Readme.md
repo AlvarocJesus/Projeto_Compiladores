@@ -8,7 +8,7 @@
 first -> depende first | fazDeNovo first | eOSeuNegocio first | olhaSo first | variavel first | comentario first | olhaSo first | ε
 ```
 
-### Depende - IF -> Ok
+### Depende - IF -> Ok com resalva
 
 ```txt
 depende -> depende ( condicao ) { first } planoB
@@ -32,21 +32,14 @@ string -> "(id+num+flutuante)"
 ### EOSeuNegocio - For -> Ok
 
 ```txt
-eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { expressao }
+eOSeuNegocio -> eOSeuNegocio ( varContador ";" condicao ";" incremento ) { first }
 varContador -> tipoVariavel variavel operador num
 condicao -> variavel operador variavel
 incremento -> id operador incremento'
 incremento' -> num | ε
-expressao -> variavel "=" variavel ";" | mathExpressao ";"
-
-mathExpressao -> TmathExpressao’
-mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
-math -> Fmath´
-math´ -> *Fmath´ | /Fmath´ | ε
-
 
 tipoVariavel -> taOk | gaviao | caixaPreta
-variavel -> id | num | flutuante | string | ( mathExpressao )
+variavel -> id | num | flutuante | string
 operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"
 
 id -> [a-zA-Z]⁺
@@ -58,14 +51,8 @@ string -> "(id+num+flutuante)"
 ### FazDeNovo - While -> Ok
 
 ```txt
-while -> fazDeNovo ( condicao ) { expressao }
+while -> fazDeNovo ( condicao ) { first }
 condicao -> variavel operador variavel
-expressao -> mathExpressao ";"
-
-mathExpressao -> TmathExpressao’
-mathExpressao’ -> +TmathExpressao’ | -TmathExpressao’ | ε
-math -> Fmath´
-math´ -> *Fmath´ | /Fmath´ | ε
 
 varivel -> id | num | flutuante | string | ( mathExpressao )
 operador -> ">" | "<" | "<=" | ">=" | "+=" | "-=" | "++" | "--"

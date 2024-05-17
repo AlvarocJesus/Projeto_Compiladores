@@ -24,10 +24,7 @@ public class Main {
     if (result == 2) {
       System.out.println("Entrou no nosso comando if");
     }
-    while (y == 5) {
-      int aux = y + 1;
-      System.out.println(aux);
-    }
+    
     for (int i = 0; i < 5; i++) {
       System.out.println("Deu bom");
     }

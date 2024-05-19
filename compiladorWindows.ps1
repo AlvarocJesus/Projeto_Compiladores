@@ -1,9 +1,26 @@
-echo "Iniciando Compilador Unix"
+cls
 
-javac */*.java
+# echo "Iniciando Compilador Unix"
 
-java ./projeto/Main >> Main.java
+# javac */*.java
 
-javac Main.java
+# java ./projeto/Main >> Main.java
 
-java Main
+# javac Main.java
+
+# java Main
+
+# Escreva a mensagem inicial
+Write-Host "Iniciando Compilador PowerShell"
+
+# Compile todos os arquivos Java na pasta atual e subpastas
+Get-ChildItem -Recurse -Filter "*.java" | ForEach-Object {javac $_.FullName}
+
+# Execute o arquivo Java e redirecione a saída para um novo arquivo Java na pasta raiz
+java .\projeto\Main.java > .\Main.java
+
+# Compile o novo arquivo Java
+javac .\Main.java
+
+# Execute o novo arquivo Java
+java .\Main

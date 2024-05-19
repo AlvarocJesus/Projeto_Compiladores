@@ -13,18 +13,16 @@ public class Main {
   public static void main(String[] args) throws IOException {
     List<Token> tokens = null;
     String codigoFonte = new Main().Arquivo();
-    
     Lexer lexer = new Lexer(codigoFonte);
     tokens = lexer.getTokens();
-
     Parser parser = new Parser(tokens);
     parser.main();
   }
-  
+
   public String Arquivo() throws IOException {
     String data = new String(
-        Files.readAllBytes(Paths
-            .get("C://Users/AlvaroCJesus/OneDrive - FEI/FEI/Ciclo_6/Compiladores/projeto/projeto/teste.me")),
+        Files.readAllBytes(
+            Paths.get("C://Users/AlvaroCJesus/OneDrive - FEI/FEI/Ciclo_6/Compiladores/projeto/projeto/teste.me")),
         StandardCharsets.UTF_8);
     return data;
   }

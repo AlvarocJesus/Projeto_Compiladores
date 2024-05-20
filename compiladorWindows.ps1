@@ -20,7 +20,7 @@ Get-ChildItem -Recurse -Filter "*.java" | ForEach-Object {javac $_.FullName}
 java .\projeto\Main.java > .\Main.java
 
 # Compile o novo arquivo Java
-javac .\Main.java
+javac Main.java
 
 # Execute o novo arquivo Java
-java .\Main
+java Main

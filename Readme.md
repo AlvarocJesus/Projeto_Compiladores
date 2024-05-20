@@ -1,39 +1,45 @@
-# Compilador da Linguagem Meme Fei Language
+# Documentação da Linguagem MemeScript
 
-## Dicionario
+A Linguagem MemeScript é uma linguagem de programação única que substitui os comandos tradicionais por memes tanto da fei quanto de fora.
 
-| Comando Original | Nossa Linguagem |
-| ---------------- | --------------- |
-| if               | depende         |
-| else             | planoB          |
-| for              | eOSeuNegocio    |
-| while            | fazDeNovo       |
-| int              | taOk            |
-| float            | gaviao          |
-| string           | caixaPreta      |
-| Entrada de dados | receba          |
-| Saida de dados   | olhaSo          |
-| break            | cheeega         |
+## Dicionário de Comandos
 
-## Executar Compilador
+Aqui estão os comandos equivalentes na Linguagem MemeScript para os comandos tradicionais:
 
-Se estiver em um ambiente Windows execute o arquivo de execução do Windows:
+| Comando Tradicional | Comando na Meme Fei |
+| ------------------- | ------------------- |
+| if                  | depende             |
+| else                | planoB              |
+| for                 | eOSeuNegocio        |
+| while               | fazDeNovo           |
+| int                 | taOk                |
+| float               | gaviao              |
+| string              | caixaPreta          |
+| Saída de dados      | olhaSo              |
+
+## Executando o Compilador
+
+Para executar o compilador, você deve seguir as instruções abaixo de acordo com o seu sistema operacional:
+
+- **Windows**:
 
 ```ps1
 .\compiladorWindows.ps1
 ```
 
-Se estiver em um ambiente Linux ou Unix execute o seguinte arquivo executável:
+- **Linux/Unix**:
 
 ```bash
 .\compiladorUnix
 ```
 
-## Exemplos de código
+## Exemplos de Código
 
-- Variaveis
+Aqui estão alguns exemplos de como escrever código na Linguagem MemeScript:
 
-```
+- **Declaração de Variáveis**:
+
+```c
 # Int
 taOk x = 5;
 
@@ -44,92 +50,59 @@ gaviao y = 1.5;
 caixaPreta nome = "Seu incrivel nome aqui";
 ```
 
-- Operadores
+- **Comentários**:
 
-```
-+
--
-*
-/
->
-<
-==
-&&
-||
+```c
+# Hellow word
 ```
 
-- Comentario
+- **Loop eOSeuNegocio(for)**:
 
-```
-# Comentario increvel
-```
-
-- For
-
-```
-for (taOk i = 0; i < y; i++) {
+```c
+eOSeuNegocio (taOk i = 0; i < y; i++) {
   olhaSo(i);
 }
 ```
 
-- While
+- **Loop fazDeNovo(while)**:
 
-```
-while() {
-
+```c
+fazDeNovo(i > 0) {
+    olhaSo("Ola")
 }
 ```
 
-- Função
+- **Condicional depende/planoB(if/else)**:
 
-```
-soma(taOk num1, taOk num2) {
-  olhaSo(num1 + num2);
+```c
+depende(result == 2){
+	olhaSo("Entrou no nosso comando if");
+}
+
+#if com else
+depende(result > 2) {
+  olhaSo(result);
+} planoB {
+	depende(result >= 2) {olhaSo(result);}
 }
 ```
 
-- Classe
+- **Entrada de dados olhaSo(print)**:
 
-```
-soma {
-  taOk num1;
-  taOk num2;
+```c
+#print com String
+olhaSo("Hellow word");
 
-  soma(taOk num1, taOk num2) {
-    num1 = num1;
-    num2 = num2;
-  }
+#print com Variável
+taOk x = 0;
+olhaSo(x);
 
-  somar() {
-    olhaSo(num1 + num2)
-  }
-}
-```
-
-- If/Else
-
-```
-if () {
-
-} else {
-
-}
-
-if () {
-
-}
-
-if () {
-
-} else if () {
-
-}
 ```
 
 ## Criadores
 
-| Nome                 | RA         |
-| -------------------- | ---------- |
-| Álvaro Coelho Jesus  | 22221002-3 |
-| Renan Guastella Piva | 22221029-6 |
-| Melissa              | 22221002-3 |
+| Nome                          | RA         |
+| ----------------------------- | ---------- |
+| Álvaro Coelho Jesus           | 22221002-3 |
+| Renan Guastella Piva          | 22221029-6 |
+| Melissa de Oliveira Fernandes | 22121096-6 |

@@ -21,10 +21,10 @@ public class Parser {
   }
 
   private void erro(String regra) {
-    System.out.println("\nErro na regra: " + regra);
-    System.out.println("Token inválido: " + token);
-    System.out.println("token invalido: " + token.getLexema());
-    System.out.println("\nErro na regra: " + regra + " que esta com o token inválido: " + token + " na linha: "
+    System.err.println("\nErro na regra: " + regra);
+    System.err.println("Token inválido: " + token);
+    System.err.println("token invalido: " + token.getLexema());
+    System.err.println("\nErro na regra: " + regra + " que esta com o token inválido: " + token + " na linha: "
         + token.getLinha() + " e coluna: " + token.getColumn());
     System.exit(0); // encerra parser
   }
